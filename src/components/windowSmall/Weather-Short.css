@@ -1,0 +1,18 @@
+.weather-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+    border-radius: 1rem;
+    border: 1px solid cadetblue;
+    background-color: lightblue;
+}
+
+.weather-block > * {
+    padding: 2rem;
+}
+
+h2 {
+    margin-bottom: 1rem;
+}

@@ -7,10 +7,10 @@ class WeatherShort extends Component {
         return (
             <div className={'weather-block'}>
                 <div>
-                    <h2>City</h2>
-                    <p>Country</p>
+                    { this.props.city ? <h2>{this.props.city}</h2> : <h2>City</h2> }
+                    { this.props.country ? <p>{this.props.country}</p> : <p>Country</p> }
                 </div>
-                <h3>Temperature</h3>
+                { this.props.temperature ? <h3>{Math.round(this.props.temperature) + '\u00B0C'}</h3> : <h3>temp.</h3> }
             </div>
         )
     }

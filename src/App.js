@@ -4,63 +4,48 @@ import "./App.css";
 import WeatherShort from "./components/windowSmall/Weather-Short";
 import Form from "./components/Form"
 
-const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
+if (!localStorage['citiesList']) {
+    localStorage['citiesList'] = JSON.stringify([])
+}
 
 class App extends Component {
-
     state = {
-        city: null,
-        country: null,
-        weather_description: null,
-        temperature: null,
-        sunrise: null,
-        sunset: null,
-        feels_like: null,
-        clouds: null,
-        temperature_max: null,
-        temperature_min: null,
-        pressure: null,
-        humidity: null,
-        wind_speed: null,
-        error: null
-    };
-
-    getWeather = async (event) => {
+        citiesList: JSON.parse(localStorage['citiesList']),
+        expand: false,//flag
+        expandInfo: {}
+    }
+    componentDidUpdate = () => {
+        localStorage['citiesList'] = JSON.stringify(this.state.citiesList);
+    }
+    addCity = (event) => {
         event.preventDefault();
-        // const form = new FormData(this);
         const city = event.target.elements.city.value;
         const country = event.target.elements.country.value;
-        const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${API_KEY}&units=metric`)
-        const data = await get_api.json();
-        console.log(data);
+        event.target.elements.city.value = '';
+        event.target.elements.country.value = '';
+        const cl = this.state.citiesList;
+        cl.push({ name: city, cc: country });
         this.setState({
-            city: data.name,
-            country: data.sys.country,
-            weather_description: data.weather[0].description,
-            temperature: data.main.temp,
-            sunrise: data.sys.sunrise,
-            sunset: data.sys.sunset,
-            feels_like: data.main.feels_like,
-            clouds: data.clouds.all,
-            temperature_max: data.main.temp_max,
-            temperature_min: data.main.temp_min,
-            pressure: data.main.pressure,
-            humidity: data.main.humidity,
-            wind_speed: data.wind.speed,
-            error: ""
+            citiesList: cl
+        });
+    }
+    openWeatherExpanded = (message,city) => {
+        console.log(message, city);
+        this.setState({
+            expandInfo: city
         })
-    };
+    }
 
     render() {
         return (
             <div className="App">
                 <h1>Hello, I'm weather app</h1>
-                <Form getWeather={this.getWeather}/>
-                <WeatherShort
-                    city={this.state.city}
-                    country={this.state.country}
-                    temperature={this.state.temperature}
-                />
+                <Form addCity={this.addCity} />
+                <div >
+                    {this.state.citiesList.map((city, index) =>
+                        <WeatherShort key={index} city={city} onCityChange={(dataFromComponent) => this.openWeatherExpanded('hello',dataFromComponent )} />
+                    )}
+                </div>
             </div>
         )
     }

@@ -23,6 +23,11 @@ function Form(props) {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
 
+  const clearInputs = ( ) => {
+    setCity("");
+    setCountry("")
+  }
+
   return (
     <>
       <TextField
@@ -51,7 +56,10 @@ function Form(props) {
         variant="contained"
         color="default"
         className={classes.button}
-        onClick={() => getWeather(city, country)}
+        onClick={() => {
+          getWeather(city, country);
+          clearInputs();
+        }}
         startIcon={<CloudUploadIcon />}
       >
         Get Weather

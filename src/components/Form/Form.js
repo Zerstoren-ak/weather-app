@@ -14,9 +14,9 @@ function Form(props) {
 
         return(
             <form onSubmit={props.addCity}>
-                <input type="text" name="city" placeholder="City..."/>
-                <input type="text" name="country" placeholder="Country code..."/>
-                <button type="submit" onClick={clearInputs}>Get Weather</button>
+                <input type="text" name="city" placeholder="City..." value={city}/>
+                <input type="text" name="country" placeholder="Country code..." value={country}/>
+                <button type="submit" onClick={()=>{getWeather(city, country); clearInputs()}}>Get Weather</button>
             </form>
         )
 }

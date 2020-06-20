@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from "./Form/Form"
 import WeatherShort from "./components/WeatherShort/WeatherShort";
 import WeatherDetailed from "./components/WeatherDetailed/WeatherDetailed";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "./App.css";
 import "./ReactToastify/ReactToastify.css"
 
@@ -55,7 +55,8 @@ class App extends Component {
                 error: ""
             })
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            toast.error(error.message)
         }
     };
 
@@ -69,7 +70,6 @@ class App extends Component {
                     country={this.state.country}
                     temperature={this.state.temperature}
                 />
-                <ToastContainer />
             </div>
         )
     }

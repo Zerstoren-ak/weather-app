@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import WeatherShort from "./components/windowSmall/Weather-Short";
-import Form from "./components/Form"
+import WeatherShort from "./components/WeatherShort/WeatherShort";
+import Form from "./Form"
 
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
 
@@ -27,28 +27,32 @@ class App extends Component {
 
     getWeather = async (event) => {
         event.preventDefault();
-        // const form = new FormData(this);
-        const city = event.target.elements.city.value;
-        const country = event.target.elements.country.value;
-        const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${API_KEY}&units=metric`)
-        const data = await get_api.json();
-        console.log(data);
-        this.setState({
-            city: data.name,
-            country: data.sys.country,
-            weather_description: data.weather[0].description,
-            temperature: data.main.temp,
-            sunrise: data.sys.sunrise,
-            sunset: data.sys.sunset,
-            feels_like: data.main.feels_like,
-            clouds: data.clouds.all,
-            temperature_max: data.main.temp_max,
-            temperature_min: data.main.temp_min,
-            pressure: data.main.pressure,
-            humidity: data.main.humidity,
-            wind_speed: data.wind.speed,
-            error: ""
-        })
+        try {
+            // const form = new FormData(this);
+            const city = event.target.elements.city.value;
+            const country = event.target.elements.country.value;
+            const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${API_KEY}&units=metric`)
+            const data = await get_api.json();
+            console.log(data);
+            this.setState({
+                city: data.name,
+                country: data.sys.country,
+                weather_description: data.weather[0].description,
+                temperature: data.main.temp,
+                sunrise: data.sys.sunrise,
+                sunset: data.sys.sunset,
+                feels_like: data.main.feels_like,
+                clouds: data.clouds.all,
+                temperature_max: data.main.temp_max,
+                temperature_min: data.main.temp_min,
+                pressure: data.main.pressure,
+                humidity: data.main.humidity,
+                wind_speed: data.wind.speed,
+                error: ""
+            })
+        } catch (e) {
+            
+        }
     };
 
     render() {

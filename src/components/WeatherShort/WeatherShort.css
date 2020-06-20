@@ -1,28 +1,32 @@
-.weather-block {
+.WeatherShort {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 50%;
-    margin: 0 auto;
+    margin: 0 auto 0.5rem auto;
     border-radius: 1rem;
     border: 1px solid cadetblue;
     background-color: lightblue;
 }
 
-.weather-block > * {
+.WeatherShort > * {
     padding: 2rem;
 }
 
 h2 {
-    margin-bottom: 1rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 h3 {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 700;
 }
 
 p {
     font-size: 1.5rem;
+}
+
+.location {
+    display: inline-flex;
+    align-items: center;
 }

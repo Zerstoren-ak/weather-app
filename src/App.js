@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import "./App.css";
-
+import Form from "./Form/Form"
 import WeatherShort from "./components/WeatherShort/WeatherShort";
 import WeatherDetailed from "./components/WeatherDetailed/WeatherDetailed";
-import Form from "./Form/Form"
+import { ToastContainer, toast } from "react-toastify";
+import "./App.css";
+import "./ReactToastify/ReactToastify.css"
+
+
 
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
 
@@ -51,8 +54,8 @@ class App extends Component {
                 wind_speed: data.wind.speed,
                 error: ""
             })
-        } catch (e) {
-            
+        } catch (error) {
+            console.log(error)
         }
     };
 
@@ -66,6 +69,7 @@ class App extends Component {
                     country={this.state.country}
                     temperature={this.state.temperature}
                 />
+                <ToastContainer />
             </div>
         )
     }

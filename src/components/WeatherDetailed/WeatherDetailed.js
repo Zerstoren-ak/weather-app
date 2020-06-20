@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class WeatherDetailed extends Component {
+function WeatherDetailed(porps) {
 
 }
+
+export default WeatherDetailed

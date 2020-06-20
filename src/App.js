@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 
 import WeatherShort from "./components/WeatherShort/WeatherShort";
-import Form from "./Form"
+import WeatherDetailed from "./components/WeatherDetailed/WeatherDetailed";
+import Form from "./Form/Form"
 
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
 
@@ -29,9 +30,9 @@ class App extends Component {
         event.preventDefault();
         try {
             // const form = new FormData(this);
-            const city = event.target.elements.city.value;
+            const city = event.target.elements.city.value;  //??
             const country = event.target.elements.country.value;
-            const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${API_KEY}&units=metric`)
+            const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${API_KEY}&units=metric`);
             const data = await get_api.json();
             console.log(data);
             this.setState({

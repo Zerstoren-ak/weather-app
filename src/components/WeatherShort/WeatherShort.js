@@ -3,8 +3,13 @@ import Clock from "../Clock/Clock";
 import "./WeatherShort.css"
 
 function WeatherShort(props) {
+
+   function handleClick() {
+        props.clickHandler()
+    }
+
     return (
-        <div className={'WeatherShort'}>
+        <div className={'WeatherShort'} onClick={handleClick}>
             <div>
                 <Clock/>
                 <div className={'location'}>

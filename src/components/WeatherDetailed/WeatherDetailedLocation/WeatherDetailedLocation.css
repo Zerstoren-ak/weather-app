@@ -1,0 +1,8 @@
+.location-detailed {
+    display: flex;
+    flex-direction: column;
+}
+
+.location-detailed * {
+    margin-bottom: 0.5rem;
+}

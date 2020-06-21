@@ -6,3 +6,7 @@
 .location-detailed * {
     margin-bottom: 0.5rem;
 }
+
+.location-detailed .weather-description {
+    text-transform: capitalize;
+}

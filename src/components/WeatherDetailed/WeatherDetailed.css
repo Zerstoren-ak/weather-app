@@ -4,8 +4,11 @@ h3 {
 }
 
 .WeatherDetailed {
-
-    justify-content: center;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50%;
     border-radius: 0.8rem;
     border: 1px solid deepskyblue;

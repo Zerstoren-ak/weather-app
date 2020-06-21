@@ -113,9 +113,9 @@ class App extends Component {
     // };
 
 
-    weatherShort = () => {
+    weatherDetailed = () => {
         return (
-            <WeatherShort
+            <WeatherDetailed
                 city={this.state.city}
                 country={this.state.country}
                 temperature={this.state.temperature}
@@ -142,13 +142,12 @@ class App extends Component {
         console.log(this.state.detailed)
     };
 
-    weatherDetailed = () => {
+    weatherShort = () => {
         return (
-            <WeatherDetailed
+            <WeatherShort
                 city={this.state.city}
                 country={this.state.country}
                 temperature={this.state.temperature}
-
                 clickHandler={this.toggleWeatherDetailed}
             />
         )

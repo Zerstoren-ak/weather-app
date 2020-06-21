@@ -6,7 +6,7 @@ function WeatherDetailedLocation(props) {
             <div className={'location-detailed'}>
                 <h2>{props.city}</h2>
                 <h3>{props.country}</h3>
-                <p>{Math.round(props.temperature) + '\u00B0C'}</p>
+                <p className={'temperature'}>{Math.round(props.temperature) + '\u00B0C'}</p>
                 <p className={'weather-description'}>{props.weather_description}</p>
             </div>
     )

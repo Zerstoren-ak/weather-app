@@ -30,7 +30,7 @@ function WeatherDetailedData(props) {
             </li>
             <li>
                 <h4>Pressure</h4>
-                <p>{props.pressure} mmHg</p>
+                <p>{props.pressure} hPa</p>
             </li>
             <li>
                 <h4>Humidity</h4>

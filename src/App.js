@@ -4,11 +4,10 @@ import WeatherShort from "./components/WeatherShort/WeatherShort";
 import WeatherDetailed from "./components/WeatherDetailed/WeatherDetailed";
 import { toast } from "react-toastify";
 import "./App.css";
-import "./ReactToastify/ReactToastify.css"
 
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
 
-if (!localStorage.citiesList) { //не пускает через []
+if (!localStorage.citiesList) {
     localStorage.citiesList = JSON.stringify([])
 }
 
@@ -113,6 +112,13 @@ class App extends Component {
     // };
 
 
+    toggleWeatherDetailed = () => {
+        this.setState({
+            detailed: !this.state.detailed
+        });
+        console.log(this.state.detailed)
+    };
+
     weatherDetailed = () => {
         return (
             <WeatherDetailed
@@ -135,12 +141,6 @@ class App extends Component {
         )
     };
 
-    toggleWeatherDetailed = () => {
-        this.setState({
-            detailed: !this.state.detailed
-        });
-        console.log(this.state.detailed)
-    };
 
     weatherShort = () => {
         return (
@@ -159,9 +159,6 @@ class App extends Component {
                 <h1>Hello, I'm weather app</h1>
                 <Form addCity={this.getWeather}/>
                 {!this.state.detailed ? this.weatherShort() : this.weatherDetailed()}
-                {/*<div>*/}
-                {/*    {this.shortList}*/}
-                {/*</div>*/}
             </div>
         )
     }

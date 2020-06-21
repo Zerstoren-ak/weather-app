@@ -10,3 +10,7 @@
 .location-detailed .weather-description {
     text-transform: capitalize;
 }
+
+.location-detailed .temperature {
+    font-size: 3rem;
+}

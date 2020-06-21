@@ -4,6 +4,7 @@ h3 {
 }
 
 .WeatherDetailed {
+    position: relative;
     margin: 0 auto;
     padding: 1rem;
     display: flex;
@@ -15,5 +16,11 @@ h3 {
     background-color: skyblue;
     color: #fff;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+.WeatherDetailed button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }
 

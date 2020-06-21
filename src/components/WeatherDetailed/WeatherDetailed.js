@@ -4,8 +4,15 @@ import WeatherDetailedData from "./WeatherDetailedData/WeatherDetailedData";
 import './WeatherDetailed.css'
 
 function WeatherDetailed(props) {
+
+    function handleClick() {
+        props.clickHandler()
+    }
+
+
     return (
         <div className={'WeatherDetailed'}>
+            <button className={'minify'} onClick={handleClick}>minify</button>
             <WeatherDetailedLocation
                 city={props.city}
                 country={props.country}

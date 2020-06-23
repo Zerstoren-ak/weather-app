@@ -6,39 +6,39 @@ function WeatherDetailedData(props) {
         <ul>
             <li>
                 <h4>Sunrise</h4>
-                <p>{new Date(props.sunrise).getHours() + ':' + new Date(props.sunrise).getMinutes()}</p>
+                <p>{new Date(props.weatherState.sunrise).getHours() + ':' + new Date(props.weatherState.sunrise).getMinutes()}</p>
             </li>
             <li>
                 <h4>Sunset</h4>
-                <p>{new Date(props.sunset).getHours() + ':' + new Date(props.sunset).getMinutes()}</p>
+                <p>{new Date(props.weatherState.sunset).getHours() + ':' + new Date(props.weatherState.sunset).getMinutes()}</p>
             </li>
             <li>
                 <h4>Feels like</h4>
-                <p>{Math.round(props.feels_like) + '\u00B0C'}</p>
+                <p>{Math.round(props.weatherState.feels_like) + '\u00B0C'}</p>
             </li>
             <li>
                 <h4>Clouds</h4>
-                <p>{props.clouds} %</p>
+                <p>{props.weatherState.clouds} %</p>
             </li>
             <li>
                 <h4>Temp. min</h4>
-                <p>{Math.round(props.temperature_min) + '\u00B0C'}</p>
+                <p>{Math.round(props.weatherState.temperature_min) + '\u00B0C'}</p>
             </li>
             <li>
                 <h4>Temp. max</h4>
-                <p>{Math.round(props.temperature_max) + '\u00B0C'}</p>
+                <p>{Math.round(props.weatherState.temperature_max) + '\u00B0C'}</p>
             </li>
             <li>
                 <h4>Pressure</h4>
-                <p>{props.pressure} hPa</p>
+                <p>{props.weatherState.pressure} hPa</p>
             </li>
             <li>
                 <h4>Humidity</h4>
-                <p>{props.humidity} %</p>
+                <p>{props.weatherState.humidity} %</p>
             </li>
             <li>
                 <h4>Wind speed</h4>
-                <p>{props.wind_speed} mtr/sec</p>
+                <p>{props.weatherState.wind_speed} mtr/sec</p>
             </li>
         </ul>
     )

@@ -9,30 +9,17 @@ function WeatherDetailed(props) {
         props.clickHandler()
     }
 
-
     return (
         <div className={'WeatherDetailed'}>
             <button className={'minify'} onClick={handleClick}>minify</button>
             <WeatherDetailedLocation
-                city={props.city}
-                country={props.country}
-                temperature={props.temperature}
-                weather_description={props.weather_description}
+                weatherState={props.weatherState}
             />
             <WeatherDetailedData
-                sunrise={props.sunrise}
-                sunset={props.sunset}
-                feels_like={props.feels_like}
-                clouds={props.clouds}
-                temperature_max={props.temperature_max}
-                temperature_min={props.temperature_min}
-                pressure={props.pressure}
-                humidity={props.humidity}
-                wind_speed={props.wind_speed}
+                weatherState={props.weatherState}
             />
         </div>
     )
-
 }
 
 export default WeatherDetailed

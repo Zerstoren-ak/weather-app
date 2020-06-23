@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Form from "./Form/Form"
-import WeatherShort from "./components/WeatherShort/WeatherShort";
-import WeatherDetailed from "./components/WeatherDetailed/WeatherDetailed";
+import WeatherShort from "./components/WeatherWrapper/WeatherShort/WeatherShort";
+import WeatherDetailed from "./components/WeatherWrapper/WeatherDetailed/WeatherDetailed";
 import { toast } from "react-toastify";
 import "./App.css";
 
@@ -14,21 +14,23 @@ if (!localStorage.citiesList) {
 class App extends Component {
 
     state = {
-        city: null,
-        country: null,
-        weather_description: null,
-        temperature: null,
-        sunrise: null,
-        sunset: null,
-        feels_like: null,
-        clouds: null,
-        temperature_max: null,
-        temperature_min: null,
-        pressure: null,
-        humidity: null,
-        wind_speed: null,
-        error: null,
-        id:null,
+        weatherState: {
+            city: null,
+            country: null,
+            weather_description: null,
+            temperature: null,
+            sunrise: null,
+            sunset: null,
+            feels_like: null,
+            clouds: null,
+            temperature_max: null,
+            temperature_min: null,
+            pressure: null,
+            humidity: null,
+            wind_speed: null,
+            error: null,
+            id:null,
+        },
 
         citiesList: JSON.parse(localStorage.citiesList),
         detailed: false,
@@ -57,21 +59,23 @@ class App extends Component {
             }
 
             this.setState({
-                city: data.name,
-                country: data.sys.country,
-                weather_description: data.weather[0].description,
-                temperature: data.main.temp,
-                sunrise: data.sys.sunrise,
-                sunset: data.sys.sunset,
-                feels_like: data.main.feels_like,
-                clouds: data.clouds.all,
-                temperature_max: data.main.temp_max,
-                temperature_min: data.main.temp_min,
-                pressure: data.main.pressure,
-                humidity: data.main.humidity,
-                wind_speed: data.wind.speed,
-                id: data.id,
-                error: ""
+                weatherState: {
+                    city: data.name,
+                    country: data.sys.country,
+                    weather_description: data.weather[0].description,
+                    temperature: data.main.temp,
+                    sunrise: data.sys.sunrise,
+                    sunset: data.sys.sunset,
+                    feels_like: data.main.feels_like,
+                    clouds: data.clouds.all,
+                    temperature_max: data.main.temp_max,
+                    temperature_min: data.main.temp_min,
+                    pressure: data.main.pressure,
+                    humidity: data.main.humidity,
+                    wind_speed: data.wind.speed,
+                    id: data.id,
+                    error: ""
+                }
             })
         } catch (error) {
             console.log(error);
@@ -90,12 +94,12 @@ class App extends Component {
         console.log(this.state)
     };
 
-    shortList = this.state.citiesList.map((element, index) =>
-        <WeatherShort key={index}
-                      city={this.state.city}
-                      country={this.state.country}
-                      temperature={this.state.temperature}/>
-    );
+    // shortList = this.state.citiesList.map((element, index) =>
+    //     <WeatherShort key={index}
+    //                   city={this.state.city}
+    //                   country={this.state.country}
+    //                   temperature={this.state.temperature}/>
+    // );
 
     // addCity = (event) => {
     //     event.preventDefault();
@@ -122,20 +126,7 @@ class App extends Component {
     weatherDetailed = () => {
         return (
             <WeatherDetailed
-                city={this.state.city}
-                country={this.state.country}
-                temperature={this.state.temperature}
-                weather_description={this.state.weather_description}
-                sunrise={this.state.sunrise}
-                sunset={this.state.sunset}
-                feels_like={this.state.feels_like}
-                clouds={this.state.clouds}
-                temperature_max={this.state.temperature_max}
-                temperature_min={this.state.temperature_min}
-                pressure={this.state.pressure}
-                humidity={this.state.humidity}
-                wind_speed={this.state.wind_speed}
-                id={this.state.id}
+                weatherState={this.state.weatherState}
                 clickHandler={this.toggleWeatherDetailed}
             />
         )
@@ -145,9 +136,7 @@ class App extends Component {
     weatherShort = () => {
         return (
             <WeatherShort
-                city={this.state.city}
-                country={this.state.country}
-                temperature={this.state.temperature}
+                weatherState={this.state.weatherState}
                 clickHandler={this.toggleWeatherDetailed}
             />
         )

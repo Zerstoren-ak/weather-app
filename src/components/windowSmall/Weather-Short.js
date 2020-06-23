@@ -48,9 +48,9 @@ function WeatherShort(props) {
     })
   };
 
-  useEffect(async () => {
-    await getWeather()
-  }, [])
+  useEffect(() => {
+    getWeather()
+  }, []);
 
   const handleClick = (e) => {
     props.onCityChange(state);

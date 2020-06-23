@@ -13,10 +13,12 @@ class App extends Component {
         citiesList: JSON.parse(localStorage['citiesList']),
         expand: false,//flag
         expandInfo: {}
-    }
-    componentDidUpdate = () => {
+    };
+
+    componentDidUpdate(nextProps, nextState, nextContext) {
         localStorage['citiesList'] = JSON.stringify(this.state.citiesList);
     }
+
     addCity = (event) => {
         event.preventDefault();
         const city = event.target.elements.city.value;
@@ -34,7 +36,7 @@ class App extends Component {
         this.setState({
             expandInfo: city
         })
-    }
+    };
 
     render() {
         return (

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
+import {toast} from "react-toastify";
 import WeatherShort from "./WeatherShort/WeatherShort";
 import WeatherDetailed from "./WeatherDetailed/WeatherDetailed";
-import {toast} from "react-toastify";
 
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
 
@@ -25,8 +25,7 @@ class WeatherWrapper extends Component {
             id: null,
             error: null,
         },
-
-        detailed: false,
+        detailed: true
     };
 
     componentDidMount() {
@@ -61,10 +60,9 @@ class WeatherWrapper extends Component {
                     humidity: data.main.humidity,
                     wind_speed: data.wind.speed,
                     id: data.id,
-                    error: ""
+                    error: data.message
                 }
             })
-
         } catch (error) {
             console.log(error);
             toast.error(error,
@@ -111,13 +109,10 @@ class WeatherWrapper extends Component {
     render() {
         return (
             <>
-                {!this.state.detailed ? this.weatherShort() : this.weatherDetailed()}
-                {/*{this.props.children}*/}
+                {this.state.detailed ? this.weatherShort() : this.weatherDetailed()}
             </>
         )
     }
-
-
 }
 
 export default WeatherWrapper

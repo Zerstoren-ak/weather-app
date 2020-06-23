@@ -24,7 +24,7 @@ class App extends Component {
         event.target.elements.country.value = ''; //??
         const newCitiesList = this.state.citiesList;
 
-        newCitiesList.push({name: city, countryCode: country});
+        newCitiesList.push({name: city, countryCode: country}); // need unique id
         this.setState({
             citiesList: newCitiesList
         });

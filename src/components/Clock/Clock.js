@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from "react";
+import React, {useState, useEffect} from "react";
 
 function Clock() {
     const[time, setTime] = useState(new Date());
@@ -12,7 +12,7 @@ function Clock() {
         minute: "2-digit"
     });
 
-    useLayoutEffect(() => {
+    useEffect(() => {
             setInterval(tick, 30000)
         }
     );

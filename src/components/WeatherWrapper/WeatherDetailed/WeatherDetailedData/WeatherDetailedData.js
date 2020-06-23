@@ -2,15 +2,23 @@ import React from "react";
 import './WeatherDetailedData.css'
 
 function WeatherDetailedData(props) {
+
+    const formatter = new Intl.DateTimeFormat("ru-RU", {
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+    const sunrise = new Date(props.weatherState.sunrise * 1000);
+    const sunset = new Date(props.weatherState.sunset * 1000);
+
     return (
         <ul>
             <li>
                 <h4>Sunrise</h4>
-                <p>{new Date(props.weatherState.sunrise).getHours() + ':' + new Date(props.weatherState.sunrise).getMinutes()}</p>
+                <p>{formatter.format(sunrise)}</p>
             </li>
             <li>
                 <h4>Sunset</h4>
-                <p>{new Date(props.weatherState.sunset).getHours() + ':' + new Date(props.weatherState.sunset).getMinutes()}</p>
+                <p>{formatter.format(sunset)}</p>
             </li>
             <li>
                 <h4>Feels like</h4>

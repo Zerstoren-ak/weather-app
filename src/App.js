@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Form from "./Form/Form"
 import WeatherWrapper from "./components/WeatherWrapper/WeatherWrapper";
-// import WeatherDetailed from "./components/WeatherWrapper/WeatherDetailed/WeatherDetailed";
 import "./App.css";
 
 if (!localStorage.citiesList) {
@@ -17,9 +16,12 @@ class App extends Component {
         event.preventDefault();
         const city = event.target.elements.city.value;
         const country = event.target.elements.country.value;
+
+        //To be solved
         // const id = this.state.id;
-        event.target.elements.city.value = '';
-        event.target.elements.country.value = '';
+
+        event.target.elements.city.value = ''; //??
+        event.target.elements.country.value = ''; //??
         const newCitiesList = this.state.citiesList;
 
         newCitiesList.push({name: city, countryCode: country});
@@ -32,19 +34,17 @@ class App extends Component {
         localStorage.citiesList = JSON.stringify(this.state.citiesList)
     }
 
-    stateShown = this.state.citiesList.map((element, index) =>
-        <WeatherWrapper key={index} city={element}/>
-    );
-
     render() {
         return (
             <div className="App">
                 <h1>Hello, I'm weather app</h1>
                 <Form addCity={this.addCity}/>
-                {/*{!this.state.detailed ? this.weatherShort : this.weatherDetailed()}*/}
-                {/*<WeatherWrapper*/}
-                {/*/>*/}
-                {this.stateShown}
+                {this.state.citiesList.map((element, index) =>
+                    <WeatherWrapper
+                        key={index}
+                        city={element}
+                    />)
+                }
             </div>
         )
     }

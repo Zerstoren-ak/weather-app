@@ -26,7 +26,7 @@ class WeatherWrapper extends Component {
             error: null,
         },
 
-        detailed: true,
+        detailed: false,
     };
 
     componentDidMount() {
@@ -46,6 +46,7 @@ class WeatherWrapper extends Component {
             }
 
             this.setState({
+                weatherState: {
                     city: data.name,
                     country: data.sys.country,
                     weather_description: data.weather[0].description,
@@ -61,6 +62,7 @@ class WeatherWrapper extends Component {
                     wind_speed: data.wind.speed,
                     id: data.id,
                     error: ""
+                }
             })
 
         } catch (error) {
@@ -78,7 +80,7 @@ class WeatherWrapper extends Component {
             )
         }
         console.log(this.state)
-    }
+    };
 
 
     toggleWeatherDetailed = () => {
@@ -110,8 +112,8 @@ class WeatherWrapper extends Component {
         return (
             <>
                 {!this.state.detailed ? this.weatherShort() : this.weatherDetailed()}
-                {this.props.children}
-                </>
+                {/*{this.props.children}*/}
+            </>
         )
     }
 

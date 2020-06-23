@@ -7,6 +7,11 @@ function Clock() {
         setTime(new Date())
     }
 
+    const formatter = new Intl.DateTimeFormat("ru-RU", {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
     useLayoutEffect(() => {
             setInterval(tick, 30000)
         }
@@ -14,7 +19,7 @@ function Clock() {
 
     return (
         <p className={'Clock'}>
-            {time.toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})}
+            {formatter.format(time)}
         </p>
     )
 }

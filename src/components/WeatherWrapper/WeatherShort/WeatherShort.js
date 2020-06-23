@@ -4,12 +4,9 @@ import "./WeatherShort.css"
 
 function WeatherShort(props) {
 
-   function handleClick() {
-        props.clickHandler()
-    }
-
+    console.log(props.weatherState);
     return (
-        <div className={'WeatherShort'} onClick={handleClick}>
+        <div className={'WeatherShort'} onClick={props.clickHandler}>
             <div>
                 <Clock/>
                 <div className={'location'}>

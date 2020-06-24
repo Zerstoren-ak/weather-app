@@ -5,13 +5,9 @@ import './WeatherDetailed.css'
 
 function WeatherDetailed(props) {
 
-    function handleClick() {
-        props.clickHandler()
-    }
-
     return (
         <div className={'WeatherDetailed'}>
-            <button className={'minify'} onClick={handleClick}>minify</button>
+            <button className={'minify'} onClick={props.clickHandlerMinify}>minify</button>
             <WeatherDetailedLocation
                 weatherState={props.weatherState}
             />

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "./Form/Form"
 import WeatherWrapper from "./components/WeatherWrapper/WeatherWrapper";
 import "./App.css";
+import WeatherShort from "./components/WeatherWrapper/WeatherShort/WeatherShort";
 
 if (!localStorage.citiesList) {
     localStorage.citiesList = JSON.stringify([])
@@ -28,11 +29,20 @@ class App extends Component {
         this.setState({
             citiesList: newCitiesList
         });
+        console.log(this.state.citiesList);
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         localStorage.citiesList = JSON.stringify(this.state.citiesList)
     }
+
+    weatherShortRemove = (index) => {
+        let newList = [...this.state.citiesList];
+        newList.splice(index, 1);
+        this.setState({
+            citiesList: newList
+        })
+    };
 
     render() {
         return (
@@ -43,6 +53,7 @@ class App extends Component {
                     <WeatherWrapper
                         key={index}
                         city={element}
+                        clickHandlerRemove={() => this.weatherShortRemove(index)}
                     />)
                 }
             </div>

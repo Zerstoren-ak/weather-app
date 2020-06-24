@@ -25,7 +25,8 @@ class WeatherWrapper extends Component {
             id: null,
             error: null,
         },
-        detailed: true
+        detailed: true,
+        citiesList: JSON.parse(localStorage.citiesList)
     };
 
     componentDidMount() {
@@ -38,7 +39,7 @@ class WeatherWrapper extends Component {
             const country = this.props.city.countryCode;
             const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${API_KEY}&units=metric`);
             const data = await get_api.json();
-            console.log(data);
+            // console.log(data);
 
             if (data.cod >= 400 && data.cod <= 499) {
                 throw data.message;
@@ -77,7 +78,7 @@ class WeatherWrapper extends Component {
                 }
             )
         }
-        console.log(this.state)
+        // console.log(this.state)
     };
 
 
@@ -92,7 +93,8 @@ class WeatherWrapper extends Component {
         return(
         <WeatherShort
             weatherState={this.state.weatherState}
-            clickHandler={this.toggleWeatherDetailed}
+            clickHandlerExpand={this.toggleWeatherDetailed}
+            clickHandlerRemove={this.props.clickHandlerRemove}
         />
         )
     };
@@ -101,7 +103,7 @@ class WeatherWrapper extends Component {
         return (
             <WeatherDetailed
                 weatherState={this.state.weatherState}
-                clickHandler={this.toggleWeatherDetailed}
+                clickHandlerMinify={this.toggleWeatherDetailed}
             />
         )
     };

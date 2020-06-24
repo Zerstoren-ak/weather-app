@@ -4,9 +4,8 @@ import "./WeatherShort.css"
 
 function WeatherShort(props) {
 
-    console.log(props.weatherState);
     return (
-        <div className={'WeatherShort'} onClick={props.clickHandler}>
+        <div className={'WeatherShort'} onClick={props.clickHandlerExpand}>
             <div>
                 <Clock/>
                 <div className={'location'}>
@@ -15,6 +14,7 @@ function WeatherShort(props) {
                 </div>
             </div>
             {props.weatherState.temperature ? <h3>{Math.round(props.weatherState.temperature) + '\u00B0C'}</h3> : <h3>t&deg;C</h3> }
+            <button onClick={props.clickHandlerRemove}>X</button>
         </div>
     )
 }

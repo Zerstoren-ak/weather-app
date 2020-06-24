@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Form from "./Form/Form"
 import WeatherWrapper from "./components/WeatherWrapper/WeatherWrapper";
 import "./App.css";
-import WeatherShort from "./components/WeatherWrapper/WeatherShort/WeatherShort";
-import {toast} from "react-toastify";
 
 if (!localStorage.citiesList) {
     localStorage.citiesList = JSON.stringify([])

@@ -16,6 +16,7 @@ class WeatherGlobal extends Component {
     };
 
     addCity = (data) => {
+        console.log('addCity props data received:', data);
         let savedCities = this.state.citiesList;
         if (!savedCities[data[0].id]) {
             savedCities[data[0].id] = data[0];
@@ -24,7 +25,9 @@ class WeatherGlobal extends Component {
             this.setState({
                 citiesList: savedCities,
                 weatherList: newWeatherList
-            })
+            });
+            console.log('global citiesList:', savedCities);
+            console.log('global weatherList:', newWeatherList)
         }
     };
 
@@ -38,8 +41,7 @@ class WeatherGlobal extends Component {
             try {
                 const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${citiesList}&units=metric&appid=${API_KEY}`);
                 const data = await get_api.json();
-
-                console.log('what we get, global', data);
+                console.log('what we get, WeatherGlobal', data);
 
                 if (!get_api.ok) {
                     throw data.message;
@@ -69,14 +71,14 @@ class WeatherGlobal extends Component {
         localStorage.citiesList = JSON.stringify(this.state.citiesList);
     }
 
-    weatherShortRemove = (event, element) => {
-        event.stopPropagation();
-        let newList = this.state.citiesList;
-        delete newList[element];
-        this.setState({
-            citiesList: newList
-        })
-    };
+    // weatherShortRemove = (event, element) => {
+    //     event.stopPropagation();
+    //     let newList = this.state.citiesList;
+    //     delete newList[element];
+    //     this.setState({
+    //         citiesList: newList
+    //     })
+    // };
 
     render() {
         return (

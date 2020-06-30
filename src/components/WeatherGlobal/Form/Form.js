@@ -9,21 +9,22 @@ function Form(props) {
             const country = event.target.country.value;
             const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${props.apiKey}&units=metric`);
             const data = await get_api.json();
-            // console.log(data);
+            console.log('form data received from fetch:', data);
 
             if (data.cod >= 400 && data.cod <= 499) {
                 throw data.message;
             }
 
-            const cityData = {};
-            cityData.id = data.id;
-            cityData.name = data.name;
-            cityData.country = data.sys.country;
-            const weather = data;
+            const cityData = {
+                id: data.id,
+                name: data.name,
+                country: data.sys.country
+            };
+            const weatherData = data;
 
-            console.log([cityData, weather]);
+            console.log('form array made:', [cityData, weatherData]);
 
-            props.addCity([cityData, weather])
+            props.addCity([cityData, weatherData])
 
         } catch (error) {
             console.log(error);

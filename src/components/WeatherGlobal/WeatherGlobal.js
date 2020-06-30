@@ -1,55 +1,71 @@
-import React, {Component} from "react";
+import React, {useState, useCallback, useEffect} from "react";
 import Form from "./Form/Form"
 import WeatherWrapper from "./WeatherWrapper/WeatherWrapper";
 import {toast} from "react-toastify";
 
 if (!localStorage.citiesList) {
-    localStorage.citiesList = JSON.stringify({})
+    localStorage.citiesList = JSON.stringify([])
 }
 
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
 
-class WeatherGlobal extends Component {
-    state = {
-        citiesList: JSON.parse(localStorage.citiesList),
-        weatherList: []
-    };
+function WeatherGlobal(props) {
 
-    addCity = (data) => {
+    const [citiesList, setCitiesList] = useState(JSON.parse(localStorage.citiesList));
+    const [weatherList, setWeatherList] = useState([]);
+    // state = {
+    //     citiesList: JSON.parse(localStorage.citiesList),
+    //     weatherList: []
+    // };
+
+    function getCitiesId() {
+        let newSet = new Set();
+        for (let i = 0; i < citiesList.length; ++i) {
+            newSet.add(citiesList[i].id)
+        }
+        console.log(newSet);
+        return newSet;
+    }
+
+    function addCity(data) {
         console.log('addCity props data received:', data);
-        let savedCities = this.state.citiesList;
-        if (!savedCities[data[0].id]) {
-            savedCities[data[0].id] = data[0];
-            let newWeatherList = this.state.weatherList;
+        let savedCities = citiesList;
+        if (!getCitiesId().has(data[0].id)) {
+            savedCities.push(data[0]);
+            let newWeatherList = weatherList;
             newWeatherList.push(data[1]);
-            this.setState({
-                citiesList: savedCities,
-                weatherList: newWeatherList
-            });
+            setCitiesList(savedCities);
+            setWeatherList(newWeatherList);
+
             console.log('global citiesList:', savedCities);
             console.log('global weatherList:', newWeatherList)
         }
-    };
 
-    componentDidMount() {
-        this.getWeather()
+        // this.setState({
+        //     citiesList: savedCities,
+        //     weatherList: newWeatherList
+        // });
     }
 
-    getWeather = async () => {
-        let citiesList = Object.keys(this.state.citiesList).join(`,`);
-        if (citiesList.length) {
+    // componentDidMount() {
+    //     this.getWeather()
+    // }
+
+    const getWeather = useCallback(async () => {
+        let citiesListID = [...getCitiesId()].join(`,`);
+        if (citiesListID.length) {
             try {
-                const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${citiesList}&units=metric&appid=${API_KEY}`);
+                const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${citiesListID}&units=metric&appid=${API_KEY}`);
                 const data = await get_api.json();
                 console.log('what we get, WeatherGlobal', data);
 
                 if (!get_api.ok) {
                     throw data.message;
                 }
-
-                this.setState({
-                    weatherList: data.list
-                })
+                // this.setState({
+                //     weatherList: data.list
+                // })
+                setWeatherList(data.list)
             } catch (error) {
                 console.log(error);
                 toast.error(error,
@@ -65,36 +81,43 @@ class WeatherGlobal extends Component {
                 )
             }
         }
-    };
+    }, [getCitiesId]);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        localStorage.citiesList = JSON.stringify(this.state.citiesList);
+    useEffect(() => {
+        getWeather()
+    }, [getWeather]);
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     localStorage.citiesList = JSON.stringify(this.state.citiesList);
+    // }
+
+    useEffect(() => {
+        localStorage.citiesList = JSON.stringify(citiesList)
+    });
+
+    function weatherShortRemove(event, index) {
+        event.stopPropagation();
+        let newList = citiesList;
+        newList.splice(index, 1);
+        // this.setState({
+        //     citiesList: newList
+        // })
+        setCitiesList(newList);
     }
 
-    // weatherShortRemove = (event, element) => {
-    //     event.stopPropagation();
-    //     let newList = this.state.citiesList;
-    //     delete newList[element];
-    //     this.setState({
-    //         citiesList: newList
-    //     })
-    // };
-
-    render() {
-        return (
-            <>
-                <Form addCity={this.addCity} apiKey={API_KEY}/>
-                {Object.keys(this.state.citiesList).map((element, index) =>
-                    <WeatherWrapper
-                        key={element}
-                        city={this.state.citiesList[element]}
-                        weather={this.state.weatherList[index] || false}
-                        clickHandlerRemove={(event) => this.weatherShortRemove(event, element)}
-                    />)
-                }
-            </>
-        )
-    }
+    return (
+        <>
+            <Form addCity={addCity} apiKey={API_KEY}/>
+            {[...getCitiesId()].map((element, index) =>
+                <WeatherWrapper
+                    key={index}
+                    city={citiesList[index]}
+                    weather={weatherList[index] || false}
+                    clickHandlerRemove={(event) => weatherShortRemove(event, index)}
+                />)
+            }
+        </>
+    )
 }
 
 export default WeatherGlobal;

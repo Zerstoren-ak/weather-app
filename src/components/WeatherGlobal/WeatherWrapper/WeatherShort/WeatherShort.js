@@ -3,7 +3,7 @@ import React from "react";
 import "./WeatherShort.css"
 
 function WeatherShort(props) {
-    console.log('WeatherShort received props', props.weather);
+    console.log('WeatherShort received props', props.city);
     return (
         <div className={'WeatherShort'} onClick={props.clickHandlerExpand}>
             <div>

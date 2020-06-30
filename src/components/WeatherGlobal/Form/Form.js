@@ -9,7 +9,6 @@ function Form(props) {
             const country = event.target.country.value;
             const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${props.apiKey}&units=metric`);
             const data = await get_api.json();
-            console.log('form data received from fetch:', data);
 
             if (data.cod >= 400 && data.cod <= 499) {
                 throw data.message;

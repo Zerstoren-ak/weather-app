@@ -7,6 +7,8 @@ function Form(props) {
         try {
             const city = event.target.city.value;
             const country = event.target.country.value;
+            event.target.city.value = ``;
+            event.target.country.value = ``;
             const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${props.apiKey}&units=metric`);
             const data = await get_api.json();
 
@@ -20,7 +22,6 @@ function Form(props) {
                 country: data.sys.country
             };
             const weatherData = data;
-
             console.log('form array made:', [cityData, weatherData]);
 
             props.addCity([cityData, weatherData])

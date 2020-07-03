@@ -1,5 +1,5 @@
 import React from "react";
-// import Clock from "../../Clock/Clock";
+import Clock from "./Clock/Clock";
 import "./WeatherShort.css"
 
 function WeatherShort(props) {
@@ -7,7 +7,7 @@ function WeatherShort(props) {
     return (
         <div className={'WeatherShort'} onClick={props.clickHandlerExpand}>
             <div>
-                {/*<Clock/>*/}
+                <Clock/>
                 <div className={'location'}>
                     <h2>{props.city.name}</h2>
                     <p>, {props.city.country}</p>

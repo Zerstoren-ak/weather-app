@@ -9,10 +9,11 @@ function WeatherDetailed(props) {
         <div className={'WeatherDetailed'}>
             <button className={'minify'} onClick={props.clickHandlerMinify}>minify</button>
             <WeatherDetailedLocation
-                weatherState={props.weatherState}
+                city={props.city}
+                weather={props.weather}
             />
             <WeatherDetailedData
-                weatherState={props.weatherState}
+                weather={props.weather}
             />
         </div>
     )

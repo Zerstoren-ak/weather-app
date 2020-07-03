@@ -1,19 +1,19 @@
 import React from "react";
-import Clock from "../../Clock/Clock";
+import Clock from "./Clock/Clock";
 import "./WeatherShort.css"
 
 function WeatherShort(props) {
-
+    console.log('WeatherShort received props', props.city);
     return (
         <div className={'WeatherShort'} onClick={props.clickHandlerExpand}>
             <div>
                 <Clock/>
                 <div className={'location'}>
-                    {props.weatherState.city ? <h2>{props.weatherState.city}</h2> : <h2>City</h2>}
-                    {props.weatherState.country ? <p>, {props.weatherState.country}</p> : <p>, Country</p>}
+                    <h2>{props.city.name}</h2>
+                    <p>, {props.city.country}</p>
                 </div>
             </div>
-            {props.weatherState.temperature ? <h3>{Math.round(props.weatherState.temperature) + '\u00B0C'}</h3> : <h3>t&deg;C</h3> }
+            {!props.weather ? <h3>t&deg;C</h3>  : <h3>{Math.round(props.weather.main.temp) + '\u00B0C'}</h3>  }
             <button onClick={props.clickHandlerRemove}>X</button>
         </div>
     )

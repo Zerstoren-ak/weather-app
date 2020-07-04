@@ -7,7 +7,7 @@ function WeatherShort(props) {
     return (
         <div className={'WeatherShort'}>
             <div>
-                <Clock/>
+                {/*<Clock/>*/}
                 <div className={'location'}>
                     <h2>{props.city.name}</h2>
                     <p>, {props.city.country}</p>

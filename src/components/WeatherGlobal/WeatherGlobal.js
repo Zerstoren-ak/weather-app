@@ -3,6 +3,7 @@ import Form from "./Form/Form"
 import WeatherWrapper from "./WeatherWrapper/WeatherWrapper";
 import {toast} from "react-toastify";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
+import './WeatherGlobal.css'
 
 if (!localStorage.citiesList) {
     localStorage.citiesList = JSON.stringify([])
@@ -35,6 +36,7 @@ function WeatherGlobal(props) {
                 const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${idList}&units=metric&appid=${API_KEY}`);
                 const data = await get_api.json();
                 console.log('WHAT WE GET, WeatherGlobal', data);
+
                 //from API- we get data for multiple cities by city ID
                 if (!get_api.ok) {
                     throw data.message;
@@ -77,10 +79,10 @@ function WeatherGlobal(props) {
 
     function onDragEnd(result) {
         const {destination, source, draggableId} = result;
-        console.log('result', result);
-        console.log('destination', destination);
-        console.log('source', source);
-        console.log('source-index', source.index);
+        // console.log('result', result);
+        // console.log('destination', destination);
+        // console.log('source', source);
+        // console.log('source-index', source.index);
 
         if (!destination) {
             return;
@@ -94,9 +96,9 @@ function WeatherGlobal(props) {
         }
 
         const newOrder = [...citiesList];
-        const filter = newOrder.filter((e) => e.id === +draggableId);
+        const draggedItem = newOrder.filter((e) => e.id === +draggableId);
         newOrder.splice(source.index, 1);
-        newOrder.splice(destination.index, 0, ...filter);
+        newOrder.splice(destination.index, 0, ...draggedItem);
         setCitiesList(newOrder);
     }
 

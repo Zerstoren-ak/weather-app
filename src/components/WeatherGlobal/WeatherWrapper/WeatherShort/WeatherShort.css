@@ -40,7 +40,8 @@ p {
     right: 1rem;
 }
 
-.WeatherShort:hover {
+.WeatherShort:hover,
+.WeatherShort:active {
     box-shadow: 0 0 10px 0 deepskyblue;
     transform: scale(1.02);
     cursor: move;

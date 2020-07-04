@@ -32,7 +32,7 @@ function WeatherWrapper(props) {
         )
     }
 
-    function convertToString() {
+    function convertIdToString() {
         if (props.city.id) {
             return props.city.id.toString()
         }
@@ -40,7 +40,7 @@ function WeatherWrapper(props) {
 
     return (
         <>
-            <Draggable draggableId={convertToString()} index={props.index}>
+            <Draggable draggableId={convertIdToString()} index={props.index}>
                 {provided =>
                     <div className={'WeatherWrapper'}
                          ref={provided.innerRef}

@@ -82,6 +82,10 @@ function WeatherGlobal(props) {
         console.log('source', source);
         console.log('source-index', source.index);
 
+        if (!destination) {
+            return;
+        }
+
         if (
             destination.droppableId === source.droppableId &&
             destination.index === source.index

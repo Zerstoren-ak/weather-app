@@ -1,24 +1,6 @@
 .WeatherShort {
-    position: relative;
-    display: flex;
-    padding: 1rem;
     justify-content: space-between;
-    align-items: center;
-    width: 50%;
-    margin: 0 auto 0.5rem auto;
-    border-radius: 0.8rem;
-    border: 1px solid deepskyblue;
-    background-color: skyblue;
-    color: #fff;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-
     transition: .1s ease-in;
-}
-
-.WeatherShort:hover {
-    cursor: pointer;
-    box-shadow: 0 0 10px 0 deepskyblue;
-    transform: scale(1.02);
 }
 
 .WeatherShort > * {
@@ -46,7 +28,20 @@ p {
 .WeatherShort button {
     position: absolute;
     top: 1rem;
-    right: 1rem;
     padding: 0 0.5rem;
     z-index: 2;
+}
+
+.WeatherShort .weather-remove {
+    left: 1rem;
+}
+
+.WeatherShort .weather-expand {
+    right: 1rem;
+}
+
+.WeatherShort:hover {
+    box-shadow: 0 0 10px 0 deepskyblue;
+    transform: scale(1.02);
+    cursor: move;
 }

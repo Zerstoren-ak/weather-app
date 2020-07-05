@@ -12,6 +12,10 @@ function WeatherWrapper(props) {
     }
 
     function weatherShort() {
+        if(props.weather.timezone) {
+            props.weather.sys.timezone = props.weather.timezone
+        }
+
         return(
             <WeatherShort
                 city={props.city}

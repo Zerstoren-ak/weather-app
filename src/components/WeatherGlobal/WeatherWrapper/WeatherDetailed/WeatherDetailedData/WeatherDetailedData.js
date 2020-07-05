@@ -20,8 +20,12 @@ function WeatherDetailedData(props) {
         hour: "2-digit",
         minute: "2-digit",
     });
-    const sunrise = new Date(props.weather.sys.sunrise * 1000);
-    const sunset = new Date(props.weather.sys.sunset * 1000);
+
+    const now = new Date();
+    const toLocalTime = (now.getTimezoneOffset() * 60000) + (props.weather.sys.timezone*1000);
+
+    const sunrise = (props.weather.sys.sunrise * 1000) + toLocalTime;
+    const sunset = (props.weather.sys.sunset * 1000) + toLocalTime;
 
     return (
         <ul>

@@ -15,11 +15,11 @@ function Clock(props) {
             let utc_timestamp = now.getTime() + (now.getTimezoneOffset() * 60000);
             setTime(utc_timestamp + props.sys.timezone*1000);
             function tick() {
-                setTime(time => time += 1000)
+                setTime(t => t += 1000)
             }
             timer = setInterval(tick, 1000)
         }
-        return ()=>{
+        return () => { //ComponentWillUnmount
             clearInterval(timer)
         }
     }, [props]);

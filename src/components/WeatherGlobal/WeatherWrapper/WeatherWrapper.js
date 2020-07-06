@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import WeatherShort from "./WeatherShort/WeatherShort";
 import WeatherDetailed from "./WeatherDetailed/WeatherDetailed";
 import {Draggable} from "react-beautiful-dnd";
+import {CSSTransition} from "react-transition-group";
 import './WeatherWrapper.css'
 
 function WeatherWrapper(props) {
     const [detailed, setDetailed] = useState(true);
+    const [inProp, setInProp] = useState(false);
 
     function toggleWeatherDetailed() {
         setDetailed(!detailed);
     }
 
     function weatherShort() {
+        if(props.weather.timezone) {
+            props.weather.sys.timezone = props.weather.timezone
+        }
+
         return(
             <WeatherShort
                 city={props.city}

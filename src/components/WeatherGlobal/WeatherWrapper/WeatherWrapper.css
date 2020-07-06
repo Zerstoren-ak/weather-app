@@ -4,9 +4,43 @@
     padding: 1rem;
     display: flex;
     align-items: center;
-    border-radius: 0.8rem;
+    border-radius: 8px;
     border: 1px solid deepskyblue;
     background-color: skyblue;
     color: #fff;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+
+    transition: .1s ease-in;
+}
+
+.WeatherWrapper .weather-expand-minify {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    color: #fff;
+    border-color: #fff;
+    text-transform: lowercase;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.WeatherWrapper .weather-expand-minify:hover {
+    color: deepskyblue;
+    background-color: #fff;
+    border-color: deepskyblue;
+}
+
+.alert-enter {
+    opacity: 0;
+}
+.alert-enter-active {
+    opacity: 1;
+    transition: opacity 500ms;
+}
+.alert-exit {
+    opacity: 1;
+}
+.alert-exit-active {
+    opacity: 0;
+    transition: opacity 500ms;
 }

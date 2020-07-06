@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <ToastContainer/>
+    <ToastContainer className={"toast-error"} />
   </React.StrictMode>,
   document.getElementById('root')
 );

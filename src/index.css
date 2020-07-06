@@ -57,5 +57,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   text-align: center;
-  background-color: #ccc;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+  url(./img/main-bg.jpeg) no-repeat top / cover
+}
+
+.toast-error {
+  border-radius: 20px;
 }

@@ -16,7 +16,7 @@ class App extends Component {
         this.setState({
             toShow: arr
         });
-        if (arr.length == 0) {
+        if (arr.length === 0) {
             arr.push(1,2,3)
         }
     }
@@ -25,11 +25,11 @@ class App extends Component {
 
         let show = null;
 
-        if (this.state.toShow.length == 3) {
+        if (this.state.toShow.length === 3) {
             show = <WeatherGlobal/>
-        } else if (this.state.toShow.length == 2) {
+        } else if (this.state.toShow.length === 2) {
             show = <FormRegistration/>
-        } else if (this.state.toShow.length == 1) {
+        } else if (this.state.toShow.length === 1) {
             show = <FormSignIn/>
         }
 

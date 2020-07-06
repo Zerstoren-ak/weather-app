@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from "react";
-import Form from "./Form/Form"
+import FormCitySearch from "./FormCitySearch/FormCitySearch"
 import WeatherWrapper from "./WeatherWrapper/WeatherWrapper";
 import {toast} from "react-toastify";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
@@ -103,11 +103,9 @@ function WeatherGlobal(props) {
         setCitiesList(newOrder);
     }
 
-    // const weatherWrappers = ;
-
     return (
         <>
-            <Form addCity={addCity} apiKey={API_KEY}/>
+            <FormCitySearch addCity={addCity} apiKey={API_KEY}/>
             <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable droppableId={'main-order'}>
                         {provided => (
@@ -125,7 +123,6 @@ function WeatherGlobal(props) {
                                         >
                                             <WeatherWrapper
                                                 index={index}
-                                                // key={citiesList[index].id}
                                                 city={citiesList[index]}
                                                 weather={weatherList[index] || false}
                                                 clickHandlerRemove={(event) => weatherShortRemove(event, index)}

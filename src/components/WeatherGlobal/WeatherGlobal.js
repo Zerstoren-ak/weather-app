@@ -118,8 +118,8 @@ function WeatherGlobal(props) {
                                     {citiesList.map((element, index) =>
                                         <CSSTransition
                                             key={citiesList[index].id}
-                                            timeout={400}
-                                            classNames="transition-weather-item"
+                                            timeout={500}
+                                            classNames="transition-item-global"
                                         >
                                             <WeatherWrapper
                                                 index={index}

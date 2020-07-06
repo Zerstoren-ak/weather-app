@@ -30,17 +30,25 @@
     border-color: deepskyblue;
 }
 
-.alert-enter {
+.WeatherWrapper .transition-item-detailed-enter {
     opacity: 0;
+    width: 0;
+    transform-origin: top left;
 }
-.alert-enter-active {
+.WeatherWrapper .transition-item-detailed-enter-active {
     opacity: 1;
-    transition: opacity 500ms;
+    width: 100%;
+    transform-origin: top left;
+    transition: all 400ms ease-in-out;
 }
-.alert-exit {
+.WeatherWrapper .transition-item-detailed-exit {
     opacity: 1;
+    width: 100%;
+    transform-origin: top left;
 }
-.alert-exit-active {
+.WeatherWrapper .transition-item-detailed-exit-active {
     opacity: 0;
-    transition: opacity 500ms;
+    width: 0;
+    transform-origin: top left;
+    transition: all 400ms ease-in-out;
 }

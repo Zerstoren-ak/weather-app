@@ -22,7 +22,6 @@ class App extends Component {
     }
 
     render() {
-
         let show = null;
 
         if (this.state.toShow.length === 3) {

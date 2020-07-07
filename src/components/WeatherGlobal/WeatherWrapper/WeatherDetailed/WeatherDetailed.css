@@ -7,8 +7,12 @@ h3 {
     flex-direction: column;
 }
 
-.WeatherDetailed:hover,
-.WeatherDetailed:active {
-    box-shadow: 0 0 10px 0 deepskyblue;
-    transform: scale(1.02);
+.WeatherDetailed * {
+    z-index: 2;
 }
+
+/*.WeatherDetailed:hover,*/
+/*.WeatherDetailed:active {*/
+/*    box-shadow: 0 0 10px 0 deepskyblue;*/
+/*    transform: scale(1.02);*/
+/*}*/

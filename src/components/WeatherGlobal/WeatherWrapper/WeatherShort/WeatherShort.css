@@ -3,7 +3,7 @@
 }
 
 .WeatherShort > * {
-    padding: 1rem;
+    padding: .7rem;
 }
 
 .WeatherShort>div {
@@ -47,5 +47,9 @@ p {
 .WeatherShort:active {
     box-shadow: 0 0 10px 0 deepskyblue;
     transform: scale(1.02);
+}
+
+.Clock {
+    margin-bottom: .2rem;
 }
 

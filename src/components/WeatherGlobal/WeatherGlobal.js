@@ -107,33 +107,33 @@ function WeatherGlobal(props) {
         <>
             <FormCitySearch addCity={addCity} apiKey={API_KEY}/>
             <DragDropContext onDragEnd={onDragEnd}>
-                    <Droppable droppableId={'main-order'}>
-                        {provided => (
-                            <div
-                                className={'WeatherGlobal'}
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                            >
-                                <TransitionGroup>
-                                    {citiesList.map((element, index) =>
-                                        <CSSTransition
-                                            key={citiesList[index].id}
-                                            timeout={500}
-                                            classNames="transition-item-global"
-                                        >
-                                            <WeatherWrapper
-                                                index={index}
-                                                city={citiesList[index]}
-                                                weather={weatherList[index] || false}
-                                                clickHandlerRemove={(event) => weatherShortRemove(event, index)}
-                                            />
-                                        </CSSTransition>)
-                                    }
-                                    {provided.placeholder}
-                                </TransitionGroup>
-                            </div>
-                        )}
-                    </Droppable>
+                <Droppable droppableId={'main-order'}>
+                    {provided => (
+                        <div
+                            className={'WeatherGlobal'}
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                        >
+                            <TransitionGroup>
+                                {citiesList.map((element, index) =>
+                                    <CSSTransition
+                                        key={citiesList[index].id}
+                                        timeout={500}
+                                        classNames="transition-item-global"
+                                    >
+                                        <WeatherWrapper
+                                            index={index}
+                                            city={citiesList[index]}
+                                            weather={weatherList[index] || false}
+                                            clickHandlerRemove={(event) => weatherShortRemove(event, index)}
+                                        />
+                                    </CSSTransition>)
+                                }
+                                {provided.placeholder}
+                            </TransitionGroup>
+                        </div>
+                    )}
+                </Droppable>
             </DragDropContext>
         </>
     )

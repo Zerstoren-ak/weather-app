@@ -35,12 +35,12 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>Hello, I'm weather app</h1>
-                <button
-                    style={{backgroundColor: "red", fontWeight: "bold", fontSize: "3rem", borderRadius: "999px"}}
-                    onClick={() => this.setToShow()}
-                >
-                    CLICK!
-                </button>
+                {/*<button*/}
+                {/*    style={{backgroundColor: "red", fontWeight: "bold", fontSize: "3rem", borderRadius: "999px"}}*/}
+                {/*    onClick={() => this.setToShow()}*/}
+                {/*>*/}
+                {/*    CLICK!*/}
+                {/*</button>*/}
                 {show}
             </div>
         )

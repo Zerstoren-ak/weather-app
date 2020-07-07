@@ -88,8 +88,8 @@ function WeatherWrapper(props) {
                          {...provided.draggableProps}
                          {...provided.dragHandleProps}
                     >
-                        <video autoPlay loop muted>
-                            <source src={videoSource} type="video/mp4" />
+                        <video autoPlay loop muted src={videoSource}>
+                            {/*<source src={videoSource} type="video/mp4" />*/}
                         </video>
                         {detailed ? weatherShort() : weatherDetailed()}
                         {/*{showWeatherShort && weatherShort()}*/}

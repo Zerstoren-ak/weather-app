@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import WeatherShort from "./WeatherShort/WeatherShort";
 import WeatherDetailed from "./WeatherDetailed/WeatherDetailed";
 import {Draggable} from "react-beautiful-dnd";

@@ -3,20 +3,20 @@
     margin: 0 auto;
 }
 
-.transition-weather-item-enter {
+.WeatherGlobal .transition-item-global-enter {
     opacity: 0;
     transform: scale(0.2);
 }
-.transition-weather-item-enter-active {
+.WeatherGlobal .transition-item-global-enter-active {
     opacity: 1;
     transform: scale(1);
     transition: all 500ms ease-in-out;
 }
-.transition-weather-item-exit {
+.WeatherGlobal .transition-item-global-exit {
     opacity: 1;
     transform: scale(1);
 }
-.transition-weather-item-exit-active {
+.WeatherGlobal .transition-item-global-exit-active {
     opacity: 0;
     transform: scale(0.2);
     transition: all 500ms ease-in-out;

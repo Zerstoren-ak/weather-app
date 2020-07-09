@@ -10,10 +10,10 @@ function Clock(props) {
 
     useEffect(() => {
         let timer = null;
-        if (props.sys) {
+        if (props.weather.sys) {
             let now = new Date();
             let utc_timestamp = now.getTime() + (now.getTimezoneOffset() * 60000);
-            setTime(utc_timestamp + props.sys.timezone*1000);
+            setTime(utc_timestamp + props.weather.sys.timezone * 1000);
             function tick() {
                 setTime(t => t += 1000)
             }

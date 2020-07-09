@@ -46,6 +46,10 @@ h1, h2 {
   font-weight: bold;
 }
 
+:root {
+  --main-clr: rgb(160, 100, 90);
+}
+
 body {
   margin: 0;
   padding: 0 15px;
@@ -57,8 +61,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   text-align: center;
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-  url(./img/main-bg.jpeg) no-repeat top / cover
+  background:
+          linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+          url(./img/main-bg.jpeg) no-repeat top / cover;
+  min-height: 1200px;
 }
 
 .toast-error {

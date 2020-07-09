@@ -3,11 +3,13 @@
 }
 
 .WeatherShort > * {
-    padding: 1rem;
+    padding: .7rem;
 }
 
 .WeatherShort>div {
     text-align: left;
+    position: relative;
+    z-index: 2;
 }
 
 h2 {
@@ -17,6 +19,7 @@ h2 {
 .WeatherShort h3 {
     font-size: 3rem;
     font-weight: 700;
+    z-index: 2;
 }
 
 p {
@@ -43,9 +46,12 @@ p {
     transition: .3s;
 }
 
-.WeatherShort:hover,
-.WeatherShort:active {
-    box-shadow: 0 0 10px 0 deepskyblue;
-    transform: scale(1.02);
-}
+/*.WeatherShort:hover,*/
+/*.WeatherShort:active {*/
+/*    box-shadow: 0 0 10px 0 deepskyblue;*/
+/*    transform: scale(1.02);*/
+/*}*/
 
+.Clock {
+    margin-bottom: .2rem;
+}

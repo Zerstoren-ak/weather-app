@@ -32,6 +32,8 @@ function WeatherGlobal(props) {
     const getWeather = useCallback(async () => {
         let idList = citiesList.map(element => element.id).join(`,`);
         // console.log('id list:', idList);
+        console.log(citiesList);
+        console.log(weatherList);
         if (citiesList.length) {
             try {
                 const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${idList}&units=metric&appid=${API_KEY}`);

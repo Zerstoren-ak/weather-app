@@ -2,12 +2,15 @@ import React, {useEffect, useState} from "react";
 import WeatherShort from "./WeatherShort/WeatherShort";
 import WeatherDetailed from "./WeatherDetailed/WeatherDetailed";
 import {Draggable} from "react-beautiful-dnd";
-import {CSSTransition} from "react-transition-group";
+// import {CSSTransition} from "react-transition-group";
 import './WeatherWrapper.css'
-import Sunny from './video/Sun.mp4';
-import Cloudy from './video/Clouds.mp4'
-import Rainy from './video/Rain.mp4';
-import Storm from './video/Storm.mp4'
+import Sun from './video/Sun.mp4';
+import Clouds from './video/Clouds-day.mp4';
+import Rain from './video/Rain-day.mp4';
+import Thunderstorm from './video/Thunderstorm-day.mp4';
+import Snow from './video/Snowfall.mp4';
+import Drizzle from './video/Drizzle-day.mp4';
+import Fog from './video/Fog-day.mp4'
 
 
 function WeatherWrapper(props) {
@@ -25,7 +28,6 @@ function WeatherWrapper(props) {
         if(props.weather.timezone) {
             props.weather.sys.timezone = props.weather.timezone
         }
-
 
         return(
             <WeatherShort
@@ -56,28 +58,31 @@ function WeatherWrapper(props) {
     }
 
     useEffect(() => {
-        console.log('gjujlf', props.weather);
         if (props.weather.weather) {
             const APIDescription = props.weather.weather[0].main;
-            console.log(APIDescription);
             if (APIDescription === 'Rain') {
-                setVideoSource(Rainy);
+                setVideoSource(Rain);
             }
             if (APIDescription === 'Clear') {
-                setVideoSource(Sunny);
+                setVideoSource(Sun);
             }
             if (APIDescription === 'Clouds') {
-                setVideoSource(Cloudy);
+                setVideoSource(Clouds);
             }
             if (APIDescription === 'Thunderstorm') {
-                setVideoSource(Storm);
+                setVideoSource(Thunderstorm);
             }
-
+            if (APIDescription === 'Drizzle') {
+                setVideoSource(Drizzle);
+            }
+            if (APIDescription === 'Snow') {
+                setVideoSource(Snow);
+            }
+            if (APIDescription === 'Fog') {
+                setVideoSource(Fog);
+            }
         }
     }, [props]);
-
-
-    // let videoSource = "https://vod-progressive.akamaized.net/exp=1594149170~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F1094%2F15%2F380473795%2F1594271965.mp4~hmac=7c9baaf3a7f05db87d14ffab59a1c1e693af525d3c0eeb0704bf67a69e616bb4/vimeo-prod-skyfire-std-us/01/1094/15/380473795/1594271965.mp4?filename=Trees+-+30222.mp4";
 
             return (
             <>
@@ -88,9 +93,7 @@ function WeatherWrapper(props) {
                          {...provided.draggableProps}
                          {...provided.dragHandleProps}
                     >
-                        <video autoPlay loop muted src={videoSource}>
-                            {/*<source src={videoSource} type="video/mp4" />*/}
-                        </video>
+                        <video autoPlay loop muted src={videoSource}></video>
                         {detailed ? weatherShort() : weatherDetailed()}
                         {/*{showWeatherShort && weatherShort()}*/}
                         {/*<CSSTransition*/}

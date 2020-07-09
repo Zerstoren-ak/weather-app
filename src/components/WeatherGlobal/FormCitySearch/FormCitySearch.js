@@ -18,15 +18,15 @@ function FormCitySearch(props) {
             if (data.cod >= 400 && data.cod <= 499) {
                 throw data.message;
             }
-
+            console.log(data);
             const cityData = {
                 id: data.id,
                 name: data.name,
                 country: data.sys.country
             };
             const weatherData = data;
-            console.log('form array made:', [cityData, weatherData]);
-
+            // console.log('form array made:', [cityData, weatherData]);
+            // props.timezone = props.sys.timezone;
             props.addCity([cityData, weatherData])
 
         } catch (error) {

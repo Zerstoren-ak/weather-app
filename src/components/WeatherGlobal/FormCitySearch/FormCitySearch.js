@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, {Component, useState} from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {toast} from "react-toastify";
 import './FormCitySearch.css'
 
 function FormCitySearch(props) {
-    const[cityData, setCityData] = useState({});
-    const[weatherData, setWeatherData]= useState({});
+    // const[cityData, setCityData] = useState( {});
+    // const[weatherData, setWeatherData]= useState({});
 
     async function handleForm(event) {
         event.preventDefault();
@@ -22,21 +22,20 @@ function FormCitySearch(props) {
                 throw data.message;
             }
             console.log(data);
-            // const cityData = {
-            //     id: data.id,
-            //     name: data.name,
-            //     country: data.sys.country
-            // };
-            // const weatherData = data;
-
-            setCityData({
-                id:data.id,
+            const cityData = {
+                id: data.id,
                 name: data.name,
                 country: data.sys.country
-            });
-            setWeatherData(data);
+            };
+            // let cityInfo = JSON.parse(JSON.stringify(cityData));
+            // let cityInfo = ;
+            // setCityData(() => ({ id: data.id,
+            //     name: data.name,
+            //     country: data.sys.country,}));
+            console.log(cityData);
+            const weatherData = data;
 
-            console.log(weatherData, cityData);
+
             // console.log('form array made:', [cityData, weatherData]);
             // props.timezone = props.sys.timezone;
             props.addCity([cityData, weatherData])

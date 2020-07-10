@@ -36,6 +36,7 @@ function FormCitySearch(props) {
             });
             setWeatherData(data);
 
+            console.log(weatherData, cityData);
             // console.log('form array made:', [cityData, weatherData]);
             // props.timezone = props.sys.timezone;
             props.addCity([cityData, weatherData])

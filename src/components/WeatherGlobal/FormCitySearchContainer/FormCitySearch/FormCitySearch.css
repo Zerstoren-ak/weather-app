@@ -10,7 +10,7 @@
 }
 
 .search-form .data-submit:hover {
-    border: 1px solid var(--main-clr);
+    border: 2px solid var(--main-clr);
     background-color: rgba(255, 255, 255, 0.5);
 }
 

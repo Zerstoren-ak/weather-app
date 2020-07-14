@@ -3,14 +3,14 @@ import WeatherShort from "./WeatherShort/WeatherShort";
 import WeatherDetailed from "./WeatherDetailed/WeatherDetailed";
 import {Draggable} from "react-beautiful-dnd";
 // import {CSSTransition} from "react-transition-group";
-import './WeatherWrapper.css'
+import './WeatherWrapper.css';
 import Sun from './video/Sun.mp4';
 import Clouds from './video/Clouds-day.mp4';
 import Rain from './video/Rain-day.mp4';
 import Thunderstorm from './video/Thunderstorm-day.mp4';
 import Snow from './video/Snowfall.mp4';
 import Drizzle from './video/Drizzle-day.mp4';
-import Fog from './video/Fog-day.mp4'
+import Fog from './video/Fog-day.mp4';
 
 
 function WeatherWrapper(props) {
@@ -25,17 +25,17 @@ function WeatherWrapper(props) {
     }
 
     function weatherShort() {
-        if(props.weather.timezone) {
-            props.weather.sys.timezone = props.weather.timezone
-        }
+        // if(props.weather.timezone) {
+        //     props.weather.sys.timezone = props.weather.timezone
+        // }
 
         return(
             <WeatherShort
-                city={props.city}
-                weather={props.weather}
+                cityData={props.cityData}
+                weatherData={props.weatherData}
                 // clickHandlerExpand={() => setShowWeatherDetailed(true)}
                 clickHandlerExpand={toggleWeatherDetailed}
-                clickHandlerRemove={props.clickHandlerRemove}
+                removeCity={props.clickHandlerRemove}
             />
         )
     }
@@ -43,23 +43,23 @@ function WeatherWrapper(props) {
     function weatherDetailed() {
         return (
             <WeatherDetailed
-                city={props.city}
-                weather={props.weather}
+                cityData={props.cityData}
+                weatherData={props.weatherData}
                 // clickHandlerMinify={() => setShowWeatherDetailed(false)}
                 clickHandlerMinify={toggleWeatherDetailed}
             />
         )
     }
 
-    function convertIdToString() {
-        if (props.city.id) {
-            return props.city.id.toString()
+    function convertToString(props) {
+        if (props) {
+            return props.toString()
         }
     }
 
     useEffect(() => {
-        if (props.weather.weather) {
-            const APIDescription = props.weather.weather[0].main;
+        if (props.weatherData.weather) {
+            const APIDescription = props.weatherData.weather[0].main;
             if (APIDescription === 'Rain') {
                 setVideoSource(Rain);
             }
@@ -86,7 +86,7 @@ function WeatherWrapper(props) {
 
             return (
             <>
-            <Draggable draggableId={convertIdToString()} index={props.index}>
+            <Draggable draggableId={convertToString(props.cityData.id)} index={props.index}>
                 {provided =>
                     <div className={'WeatherWrapper'}
                          ref={provided.innerRef}

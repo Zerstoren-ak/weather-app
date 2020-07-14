@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from "react";
-import FormCitySearch from "./FormCitySearch/FormCitySearch"
+import FormCitySearchContainer from "./FormCitySearchContainer/FormCitySearchContainer"
 import WeatherWrapper from "./WeatherWrapper/WeatherWrapper";
 import {toast} from "react-toastify";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
@@ -16,27 +16,37 @@ if (!localStorage.citiesList) {
 // Пару комнонентов для роутинга, регистрация...
 
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
+const ToastSettings = {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+};
 
-function WeatherGlobal(props) {
+function WeatherGlobal() {
     const [citiesList, setCitiesList] = useState(JSON.parse(localStorage.citiesList));
     const [weatherList, setWeatherList] = useState([]);
 
     function addCity(data) {
-        console.log('addCity props data received:', data);
-        if (!citiesList.find(element => element.id === data[0].id)) {
+        console.log('WeatherGlobal func addCity(props):', data);
+        if (citiesList.find(element => element.id === data[0].id)) {
+            toast.error('city already exist', ToastSettings)
+        } else {
             setCitiesList(list => [...list, data[0]]);
-            setWeatherList(list => [...list, data[1]]);
+            // setWeatherList(list => [...list, data[1]]);
         }
     }
 
     const getWeather = useCallback(async () => {
         let idList = citiesList.map(element => element.id).join(`,`);
-        // console.log('id list:', idList);
         if (citiesList.length) {
             try {
                 const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${idList}&units=metric&appid=${API_KEY}`);
                 const data = await get_api.json();
-                console.log('WHAT WE GET, WeatherGlobal', data);
+                console.log('WeatherGlobal fetch:', data);
 
                 //from API- we get data for multiple cities by city ID
                 if (!get_api.ok) {
@@ -46,17 +56,7 @@ function WeatherGlobal(props) {
                 setWeatherList(data.list)
             } catch (error) {
                 console.log(error);
-                toast.error(error,
-                    {
-                        position: "bottom-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    }
-                )
+                toast.error(error, ToastSettings)
             }
         }
     }, [citiesList]);
@@ -71,7 +71,7 @@ function WeatherGlobal(props) {
         // console.log('useEffect localStorage')
     });
 
-    function weatherShortRemove(event, index) {
+    function weatherShortRemove(_, index) {
         // event.stopPropagation();
         let newList = [...citiesList];
         newList.splice(index, 1);
@@ -105,7 +105,7 @@ function WeatherGlobal(props) {
 
     return (
         <>
-            <FormCitySearch addCity={addCity} apiKey={API_KEY}/>
+            <FormCitySearchContainer addCity={addCity} apiKey={API_KEY} toastSettings={ToastSettings}/>
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId={'main-order'}>
                     {provided => (
@@ -123,8 +123,8 @@ function WeatherGlobal(props) {
                                     >
                                         <WeatherWrapper
                                             index={index}
-                                            city={citiesList[index]}
-                                            weather={weatherList[index] || false}
+                                            cityData={citiesList[index]}
+                                            weatherData={weatherList[index] || false}
                                             clickHandlerRemove={(event) => weatherShortRemove(event, index)}
                                         />
                                     </CSSTransition>)

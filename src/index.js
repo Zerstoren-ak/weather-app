@@ -7,10 +7,10 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <App />
     <ToastContainer className={"toast-error"} />
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 

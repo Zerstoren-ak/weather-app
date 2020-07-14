@@ -4,20 +4,21 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import "./WeatherShort.css"
 import Button from "@material-ui/core/Button";
+import {degree} from "../../../../utils/utils";
 
 function WeatherShort(props) {
     // console.log('WeatherShort received props', props.city);
     return (
         <div className={'WeatherShort'}>
             <div>
-                <Clock weather={props.weather}/>
+                <Clock weather={props.weatherData}/>
                 <div className={'location'}>
-                    <h2>{props.city.name}</h2>
-                    <p>, {props.city.country}</p>
+                    <h2>{props.cityData.city}</h2>
+                    <p>, {props.cityData.country}</p>
                 </div>
             </div>
-            {!props.weather ? <h3>t&deg;C</h3>  : <h3>{Math.round(props.weather.main.temp) + '\u00B0C'}</h3>  }
-            <IconButton className={'weather-remove'} aria-label="delete" onClick={props.clickHandlerRemove}>
+            {!props.weatherData ? <h3>t&deg;C</h3>  : <h3>{degree(props.weatherData.main.temp)}</h3>  }
+            <IconButton className={'weather-remove'} aria-label="delete" onClick={props.removeCity}>
                 <DeleteIcon fontSize="small" />
             </IconButton>
             <Button

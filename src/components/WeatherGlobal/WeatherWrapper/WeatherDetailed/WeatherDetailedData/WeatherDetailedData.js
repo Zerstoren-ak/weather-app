@@ -1,4 +1,5 @@
 import React from "react";
+import {degree,timeFormatter} from "../../../../../utils/utils";
 import './WeatherDetailedData.css'
 
 function WeatherDetailedData(props) {
@@ -16,11 +17,6 @@ function WeatherDetailedData(props) {
     //             humidity: data.main.humidity,
     //             wind_speed: data.wind.speed,
 
-    const formatter = new Intl.DateTimeFormat("ru-RU", {
-        hour: "2-digit",
-        minute: "2-digit",
-    });
-
     const now = new Date();
     const toLocalTime = (now.getTimezoneOffset() * 60000) + (props.weather.sys.timezone*1000);
 
@@ -31,15 +27,15 @@ function WeatherDetailedData(props) {
         <ul>
             <li>
                 <h4>Sunrise</h4>
-                <p>{formatter.format(sunrise)}</p>
+                <p>{timeFormatter(sunrise)}</p>
             </li>
             <li>
                 <h4>Sunset</h4>
-                <p>{formatter.format(sunset)}</p>
+                <p>{timeFormatter(sunset)}</p>
             </li>
             <li>
                 <h4>Feels like</h4>
-                <p>{Math.round(props.weather.main.feels_like) + '\u00B0C'}</p>
+                <p>{degree(props.weather.main.feels_like)}</p>
             </li>
             <li>
                 <h4>Clouds</h4>
@@ -47,11 +43,11 @@ function WeatherDetailedData(props) {
             </li>
             <li>
                 <h4>Temp. min</h4>
-                <p>{Math.round(props.weather.main.temp_min) + '\u00B0C'}</p>
+                <p>{degree(props.weather.main.temp_min)}</p>
             </li>
             <li>
                 <h4>Temp. max</h4>
-                <p>{Math.round(props.weather.main.temp_max) + '\u00B0C'}</p>
+                <p>{degree(props.weather.main.temp_max)}</p>
             </li>
             <li>
                 <h4>Pressure</h4>

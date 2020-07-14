@@ -1,11 +1,8 @@
 import React, {useState, useEffect} from "react";
+import {timeFormatter} from "../../../../../utils/utils";
 
 function Clock(props) {
     const [time, setTime] = useState(0);
-    const formatter = new Intl.DateTimeFormat("ru-RU", {
-        hour: "2-digit",
-        minute: "2-digit"
-    });
 
     useEffect(() => {
         let timer = null;
@@ -25,7 +22,7 @@ function Clock(props) {
 
     return (
         <p className={'Clock'}>
-            {formatter.format(time)}
+            {timeFormatter(time)}
         </p>
     )
 }

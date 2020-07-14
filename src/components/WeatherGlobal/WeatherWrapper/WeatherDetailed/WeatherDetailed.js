@@ -18,11 +18,11 @@ function WeatherDetailed(props) {
                 minify
             </Button>
             <WeatherDetailedLocation
-                city={props.city}
-                weather={props.weather}
+                city={props.cityData}
+                weather={props.weatherData}
             />
             <WeatherDetailedData
-                weather={props.weather}
+                weather={props.weatherData}
             />
         </div>
     )

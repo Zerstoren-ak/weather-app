@@ -1,12 +1,18 @@
-import React, {Component, useState} from "react";
+import React, { useEffect, useState} from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {toast} from "react-toastify";
 import './FormCitySearch.css'
 
 function FormCitySearch(props) {
-    // const[cityData, setCityData] = useState( {});
+    const[cityData, setCityData] = useState( {});
     // const[weatherData, setWeatherData]= useState({});
+
+    useEffect(() => {
+        if (Object.keys(cityData).length !== 0) {
+            setCityData((state)=> ({...state, ...cityData}))
+        }
+    },[cityData]);
 
     async function handleForm(event) {
         event.preventDefault();
@@ -22,7 +28,7 @@ function FormCitySearch(props) {
                 throw data.message;
             }
             console.log(data);
-            const cityData = {
+            const cityData1 = {
                 id: data.id,
                 name: data.name,
                 country: data.sys.country
@@ -32,9 +38,9 @@ function FormCitySearch(props) {
             // setCityData(() => ({ id: data.id,
             //     name: data.name,
             //     country: data.sys.country,}));
-            console.log(cityData);
+            console.log(cityData1);
+            setCityData(cityData1);
             const weatherData = data;
-
 
             // console.log('form array made:', [cityData, weatherData]);
             // props.timezone = props.sys.timezone;

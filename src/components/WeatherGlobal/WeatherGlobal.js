@@ -1,5 +1,5 @@
 import React, {useState, useCallback, useEffect} from "react";
-import FormCitySearch from "./FormCitySearch/FormCitySearch"
+import FormCitySearchContainer from "./FormCitySearchContainer/FormCitySearchContainer"
 import WeatherWrapper from "./WeatherWrapper/WeatherWrapper";
 import {toast} from "react-toastify";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
@@ -10,68 +10,75 @@ if (!localStorage.citiesList) {
     localStorage.citiesList = JSON.stringify([])
 }
 
-// Clock - подвязаться к веремени UTC с корректировкой timezone от API - локальное время выбранного города
-// *timezone - пофиксить sunrise/sunset в часовых поясах 'UTC-'
-// Сделать список draggable list
-// Пару комнонентов для роутинга, регистрация...
-
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
+const ToastSettings = {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+};
 
-function WeatherGlobal(props) {
+function WeatherGlobal() {
     const [citiesList, setCitiesList] = useState(JSON.parse(localStorage.citiesList));
     const [weatherList, setWeatherList] = useState([]);
 
     function addCity(data) {
-        console.log('addCity props data received:', data);
-        if (!citiesList.find(element => element.id === data[0].id)) {
+        console.log('WeatherGlobal func addCity(props):', data);
+        if (citiesList.find(element => element.id === data[0].id)) {
+            toast.error('city already exist', ToastSettings)
+        } else {
             setCitiesList(list => [...list, data[0]]);
-            setWeatherList(list => [...list, data[1]]);
         }
     }
 
     const getWeather = useCallback(async () => {
         let idList = citiesList.map(element => element.id).join(`,`);
-        // console.log('id list:', idList);
         if (citiesList.length) {
             try {
                 const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${idList}&units=metric&appid=${API_KEY}`);
                 const data = await get_api.json();
-                console.log('WHAT WE GET, WeatherGlobal', data);
-
+                console.log('WeatherGlobal fetch result:', data);
                 //from API- we get data for multiple cities by city ID
                 if (!get_api.ok) {
                     throw data.message;
                 }
-
-                setWeatherList(data.list)
+                const weatherData = data.list.map(element => {
+                    return ({
+                        temperature: element.main.temp,
+                        timezone: element.sys.timezone,
+                        description: element.weather[0].main,
+                        sunrise: element.sys.sunrise,
+                        sunset: element.sys.sunset,
+                        feelsLike: element.main.feels_like,
+                        clouds: element.clouds.all,
+                        temperatureMin: element.main.temp_min,
+                        temperatureMax: element.main.temp_max,
+                        pressure: element.main.pressure,
+                        humidity: element.main.humidity,
+                        windSpeed: element.wind.speed,
+                    })
+                });
+                console.log('WeatherGlobal prepared data form fetch', weatherData);
+                setWeatherList(weatherData)
             } catch (error) {
                 console.log(error);
-                toast.error(error,
-                    {
-                        position: "bottom-center",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    }
-                )
+                toast.error(error, ToastSettings)
             }
         }
     }, [citiesList]);
 
     useEffect(() => {
         getWeather();
-        // console.log('useEffect getWeather')
     }, [getWeather]);
 
     useEffect(() => {
         localStorage.citiesList = JSON.stringify(citiesList);
-        // console.log('useEffect localStorage')
     });
 
-    function weatherShortRemove(event, index) {
+    function weatherShortRemove(_, index) {
         // event.stopPropagation();
         let newList = [...citiesList];
         newList.splice(index, 1);
@@ -80,10 +87,6 @@ function WeatherGlobal(props) {
 
     function onDragEnd(result) {
         const {destination, source, draggableId} = result;
-        // console.log('result', result);
-        // console.log('destination', destination);
-        // console.log('source', source);
-        // console.log('source-index', source.index);
 
         if (!destination) {
             return;
@@ -105,7 +108,7 @@ function WeatherGlobal(props) {
 
     return (
         <>
-            <FormCitySearch addCity={addCity} apiKey={API_KEY}/>
+            <FormCitySearchContainer addCity={addCity} apiKey={API_KEY} toastSettings={ToastSettings}/>
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId={'main-order'}>
                     {provided => (
@@ -123,8 +126,8 @@ function WeatherGlobal(props) {
                                     >
                                         <WeatherWrapper
                                             index={index}
-                                            city={citiesList[index]}
-                                            weather={weatherList[index] || false}
+                                            cityData={citiesList[index]}
+                                            weatherData={weatherList[index] || false}
                                             clickHandlerRemove={(event) => weatherShortRemove(event, index)}
                                         />
                                     </CSSTransition>)

@@ -58,8 +58,8 @@ function WeatherWrapper(props) {
     }
 
     useEffect(() => {
-        if (props.weatherData.weather) {
-            const APIDescription = props.weatherData.weather[0].main;
+        if (props.weatherData.description) {
+            const APIDescription = props.weatherData.description;
             if (APIDescription === 'Rain') {
                 setVideoSource(Rain);
             }
@@ -84,32 +84,30 @@ function WeatherWrapper(props) {
         }
     }, [props]);
 
-            return (
-            <>
-            <Draggable draggableId={convertToString(props.cityData.id)} index={props.index}>
-                {provided =>
-                    <div className={'WeatherWrapper'}
-                         ref={provided.innerRef}
-                         {...provided.draggableProps}
-                         {...provided.dragHandleProps}
-                    >
-                        <video autoPlay loop muted src={videoSource}></video>
-                        {detailed ? weatherShort() : weatherDetailed()}
-                        {/*{showWeatherShort && weatherShort()}*/}
-                        {/*<CSSTransition*/}
-                        {/*    in={showWeatherDetailed}*/}
-                        {/*    timeout={500}*/}
-                        {/*    classNames="transition-item-detailed"*/}
-                        {/*    unmountOnExit*/}
-                        {/*    onEnter={() => setSHowWeatherShort(false)}*/}
-                        {/*    onExited={() => setSHowWeatherShort(true)}*/}
-                        {/*>*/}
-                        {/*    {weatherDetailed()}*/}
-                        {/*</CSSTransition>*/}
-                    </div>
-                }
-            </Draggable>
-        </>
+    return (
+        <Draggable draggableId={convertToString(props.cityData.id)} index={props.index}>
+            {provided =>
+                <div className={'WeatherWrapper'}
+                     ref={provided.innerRef}
+                     {...provided.draggableProps}
+                     {...provided.dragHandleProps}
+                >
+                    <video autoPlay loop muted src={videoSource}></video>
+                    {detailed ? weatherShort() : weatherDetailed()}
+                    {/*{showWeatherShort && weatherShort()}*/}
+                    {/*<CSSTransition*/}
+                    {/*    in={showWeatherDetailed}*/}
+                    {/*    timeout={500}*/}
+                    {/*    classNames="transition-item-detailed"*/}
+                    {/*    unmountOnExit*/}
+                    {/*    onEnter={() => setSHowWeatherShort(false)}*/}
+                    {/*    onExited={() => setSHowWeatherShort(true)}*/}
+                    {/*>*/}
+                    {/*    {weatherDetailed()}*/}
+                    {/*</CSSTransition>*/}
+                </div>
+            }
+        </Draggable>
     )
 }
 

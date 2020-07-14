@@ -11,13 +11,13 @@ function WeatherShort(props) {
     return (
         <div className={'WeatherShort'}>
             <div>
-                <Clock weather={props.weatherData}/>
+                <Clock weatherData={props.weatherData}/>
                 <div className={'location'}>
                     <h2>{props.cityData.city}</h2>
                     <p>, {props.cityData.country}</p>
                 </div>
             </div>
-            {!props.weatherData ? <h3>t&deg;C</h3>  : <h3>{degree(props.weatherData.main.temp)}</h3>  }
+            {!props.weatherData ? <h3>t&deg;C</h3>  : <h3>{degree(props.weatherData.temperature)}</h3>  }
             <IconButton className={'weather-remove'} aria-label="delete" onClick={props.removeCity}>
                 <DeleteIcon fontSize="small" />
             </IconButton>

@@ -1,5 +1,6 @@
 import React from "react";
 import './WeatherDetailedLocation.css'
+import {degree} from "../../../../../utils/utils";
 
 function WeatherDetailedLocation(props) {
     //             city: data.name,
@@ -18,10 +19,10 @@ function WeatherDetailedLocation(props) {
 
     return (
             <div className={'location-detailed'}>
-                <h2>{props.city.name}</h2>
-                <h3>{props.city.country}</h3>
-                <p className={'temperature'}>{Math.round(props.weather.main.temp) + '\u00B0C'}</p>
-                <p className={'weather-description'}>{props.weather.weather[0].description}</p>
+                <h2>{props.cityData.city}</h2>
+                <h3>{props.cityData.country}</h3>
+                <p className={'temperature'}>{degree(props.weatherData.temperature)}</p>
+                <p className={'weather-description'}>{props.weatherData.description}</p>
             </div>
     )
 }

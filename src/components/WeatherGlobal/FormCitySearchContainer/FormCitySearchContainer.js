@@ -11,6 +11,7 @@ function FormCitySearchContainer({addCity, apiKey, toastSettings}) {
             console.log('FormCitySearch API data:', cityData)
             addCity([cityData]);
         }
+        // eslint-disable-next-line
     },[cityData]);
 
     async function handleForm(event) {

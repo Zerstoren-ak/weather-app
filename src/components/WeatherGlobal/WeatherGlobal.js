@@ -10,11 +10,6 @@ if (!localStorage.citiesList) {
     localStorage.citiesList = JSON.stringify([])
 }
 
-// Clock - подвязаться к веремени UTC с корректировкой timezone от API - локальное время выбранного города
-// *timezone - пофиксить sunrise/sunset в часовых поясах 'UTC-'
-// Сделать список draggable list
-// Пару комнонентов для роутинга, регистрация...
-
 const API_KEY = `30c1cbeda422363611d8892955df2a7a`;
 const ToastSettings = {
     position: "bottom-center",
@@ -46,14 +41,29 @@ function WeatherGlobal() {
             try {
                 const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${idList}&units=metric&appid=${API_KEY}`);
                 const data = await get_api.json();
-                console.log('WeatherGlobal fetch:', data);
-
+                console.log('WeatherGlobal fetch result:', data);
                 //from API- we get data for multiple cities by city ID
                 if (!get_api.ok) {
                     throw data.message;
                 }
-
-                setWeatherList(data.list)
+                const weatherData = data.list.map(element => {
+                    return ({
+                        temperature: element.main.temp,
+                        timezone: element.sys.timezone,
+                        description: element.weather[0].main,
+                        sunrise: element.sys.sunrise,
+                        sunset: element.sys.sunset,
+                        feelsLike: element.main.feels_like,
+                        clouds: element.clouds.all,
+                        temperatureMin: element.main.temp_min,
+                        temperatureMax: element.main.temp_max,
+                        pressure: element.main.pressure,
+                        humidity: element.main.humidity,
+                        windSpeed: element.wind.speed,
+                    })
+                });
+                console.log('WeatherGlobal prepared data form fetch', weatherData);
+                setWeatherList(weatherData)
             } catch (error) {
                 console.log(error);
                 toast.error(error, ToastSettings)
@@ -63,12 +73,10 @@ function WeatherGlobal() {
 
     useEffect(() => {
         getWeather();
-        // console.log('useEffect getWeather')
     }, [getWeather]);
 
     useEffect(() => {
         localStorage.citiesList = JSON.stringify(citiesList);
-        // console.log('useEffect localStorage')
     });
 
     function weatherShortRemove(_, index) {
@@ -80,10 +88,6 @@ function WeatherGlobal() {
 
     function onDragEnd(result) {
         const {destination, source, draggableId} = result;
-        // console.log('result', result);
-        // console.log('destination', destination);
-        // console.log('source', source);
-        // console.log('source-index', source.index);
 
         if (!destination) {
             return;

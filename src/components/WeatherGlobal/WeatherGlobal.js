@@ -31,7 +31,6 @@ function WeatherGlobal() {
             toast.error('city already exist', ToastSettings)
         } else {
             setCitiesList(list => [...list, data[0]]);
-            // setWeatherList(list => [...list, data[1]]);
         }
     }
 

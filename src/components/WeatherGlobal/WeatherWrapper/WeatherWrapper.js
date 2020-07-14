@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import WeatherShort from "./WeatherShort/WeatherShort";
 import WeatherDetailed from "./WeatherDetailed/WeatherDetailed";
 import {Draggable} from "react-beautiful-dnd";
-// import {CSSTransition} from "react-transition-group";
 import './WeatherWrapper.css';
 import Sun from './video/Sun.mp4';
 import Clouds from './video/Clouds-day.mp4';
@@ -15,9 +14,6 @@ import Fog from './video/Fog-day.mp4';
 
 function WeatherWrapper(props) {
     const [detailed, setDetailed] = useState(true);
-    // const [showWeatherShort, setSHowWeatherShort] = useState(true);
-    // const [showWeatherDetailed, setShowWeatherDetailed] = useState(false);
-
     const [videoSource, setVideoSource] = useState(null);
 
     function toggleWeatherDetailed() {
@@ -25,15 +21,10 @@ function WeatherWrapper(props) {
     }
 
     function weatherShort() {
-        // if(props.weather.timezone) {
-        //     props.weather.sys.timezone = props.weather.timezone
-        // }
-
         return(
             <WeatherShort
                 cityData={props.cityData}
                 weatherData={props.weatherData}
-                // clickHandlerExpand={() => setShowWeatherDetailed(true)}
                 clickHandlerExpand={toggleWeatherDetailed}
                 removeCity={props.clickHandlerRemove}
             />
@@ -45,7 +36,6 @@ function WeatherWrapper(props) {
             <WeatherDetailed
                 cityData={props.cityData}
                 weatherData={props.weatherData}
-                // clickHandlerMinify={() => setShowWeatherDetailed(false)}
                 clickHandlerMinify={toggleWeatherDetailed}
             />
         )
@@ -94,17 +84,6 @@ function WeatherWrapper(props) {
                 >
                     <video autoPlay loop muted src={videoSource}></video>
                     {detailed ? weatherShort() : weatherDetailed()}
-                    {/*{showWeatherShort && weatherShort()}*/}
-                    {/*<CSSTransition*/}
-                    {/*    in={showWeatherDetailed}*/}
-                    {/*    timeout={500}*/}
-                    {/*    classNames="transition-item-detailed"*/}
-                    {/*    unmountOnExit*/}
-                    {/*    onEnter={() => setSHowWeatherShort(false)}*/}
-                    {/*    onExited={() => setSHowWeatherShort(true)}*/}
-                    {/*>*/}
-                    {/*    {weatherDetailed()}*/}
-                    {/*</CSSTransition>*/}
                 </div>
             }
         </Draggable>

@@ -5,10 +5,8 @@ import './WeatherDetailed.css'
 import Button from "@material-ui/core/Button";
 
 function WeatherDetailed(props) {
-
     return (
         <div className={'WeatherDetailed'}>
-            {/*<button className={'weather-minify'} onClick={props.clickHandlerMinify}>minify</button>*/}
             <Button
                 className={'weather-expand-minify'}
                 onClick={props.clickHandlerMinify}

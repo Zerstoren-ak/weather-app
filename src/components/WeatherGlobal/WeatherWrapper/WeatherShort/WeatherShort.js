@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import {degree} from "../../../../utils/utils";
 
 function WeatherShort(props) {
-    // console.log('WeatherShort received props', props.city);
     return (
         <div className={'WeatherShort'}>
             <div>

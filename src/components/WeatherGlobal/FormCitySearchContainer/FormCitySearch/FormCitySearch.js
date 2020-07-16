@@ -6,21 +6,23 @@ import Button from "@material-ui/core/Button";
 function FormCitySearch({handleForm}) {
     return (
         <form className={"search-form"} onSubmit={handleForm}>
-            <TextField
+            <div>
+                <TextField
                 className={"data-input"}
                 required type={"text"}
                 name={"city"}
                 id="outlined-basic"
                 label="City..."
                 variant="outlined"
-            />
-            <TextField
-                className={"data-input"}
-                type={"text"} name={"country"}
-                id="outlined-basic"
-                label="Country code..."
-                variant="outlined"
-            />
+                 />
+                <TextField
+                    className={"data-input"}
+                    type={"text"} name={"country"}
+                    id="outlined-basic"
+                    label="Country code..."
+                    variant="outlined"
+                />
+            </div>
             <Button
                 className={"data-submit"}
                 type={onsubmit}

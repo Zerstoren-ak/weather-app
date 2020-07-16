@@ -1,3 +1,9 @@
+.App {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
 h1 {
     font-size: 45px;
     margin: 1rem;
@@ -13,4 +19,13 @@ input {
 
 button {
     cursor: pointer;
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 30px;
+    }
+    button {
+        align-self: center;
+    }
 }

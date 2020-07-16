@@ -25,3 +25,9 @@
 .search-form .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
     border-color: var(--main-clr);
 }
+
+@media (max-width: 576px) {
+    .search-form .data-input:first-child {
+        margin-bottom: 1rem;
+    }
+}

@@ -11,7 +11,6 @@ import Snow from './video/Snowfall.mp4';
 import Drizzle from './video/Drizzle-day.mp4';
 import Fog from './video/Fog-day.mp4';
 
-
 function WeatherWrapper(props) {
     const [detailed, setDetailed] = useState(true);
     const [videoSource, setVideoSource] = useState(null);
@@ -82,9 +81,7 @@ function WeatherWrapper(props) {
                      {...provided.draggableProps}
                      {...provided.dragHandleProps}
                 >
-                    <video autoPlay loop muted playsInline src={videoSource}>
-                        <source src={videoSource} type="video/mp4" />
-                    </video>
+                    <video autoPlay loop muted playsInline src={videoSource}></video>
                     {detailed ? weatherShort() : weatherDetailed()}
                 </div>
             }

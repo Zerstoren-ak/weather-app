@@ -73,4 +73,5 @@
     z-index: 1;
     object-fit: cover;
     border-radius: 8px;
+    pointer-events: none;
 }

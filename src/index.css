@@ -69,3 +69,9 @@ body {
 .toast-error {
   border-radius: 20px;
 }
+
+@media (max-width: 576px) {
+  body {
+    min-height: 800px;
+  }
+}

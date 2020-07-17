@@ -21,7 +21,7 @@ function FormCitySearchContainer({addCity, apiKey, toastSettings}) {
             const country = event.target.country.value;
             event.target.city.value = ``;
             event.target.country.value = ``;
-            const get_api = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${apiKey}&units=metric`);
+            const get_api = await fetch(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${city},${country ? country : ''}&appid=${apiKey}&units=metric`);
             const data = await get_api.json();
             //from API- we get data for 1 city by name (and country code, but it not 'required')
             if (data.cod >= 400 && data.cod <= 499) {

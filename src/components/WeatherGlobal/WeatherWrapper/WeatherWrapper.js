@@ -68,7 +68,7 @@ function WeatherWrapper(props) {
             if (APIDescription === 'Snow') {
                 setVideoSource(Snow);
             }
-            if (APIDescription === 'Fog') {
+            if (APIDescription === 'Fog' || APIDescription === 'Haze' || APIDescription === 'Mist') {
                 setVideoSource(Fog);
             }
         }
@@ -82,7 +82,9 @@ function WeatherWrapper(props) {
                      {...provided.draggableProps}
                      {...provided.dragHandleProps}
                 >
-                    <video autoPlay loop muted src={videoSource}></video>
+                    <video autoPlay loop muted playsInline src={videoSource}>
+                        <source src={videoSource} type="video/mp4" />
+                    </video>
                     {detailed ? weatherShort() : weatherDetailed()}
                 </div>
             }

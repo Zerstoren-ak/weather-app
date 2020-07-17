@@ -38,7 +38,7 @@ function WeatherGlobal() {
         let idList = citiesList.map(element => element.id).join(`,`);
         if (citiesList.length) {
             try {
-                const get_api = await fetch(`http://api.openweathermap.org/data/2.5/group?id=${idList}&units=metric&appid=${API_KEY}`);
+                const get_api = await fetch(`https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/group?id=${idList}&units=metric&appid=${API_KEY}&lang=ru`);
                 const data = await get_api.json();
                 console.log('WeatherGlobal fetch result:', data);
                 //from API- we get data for multiple cities by city ID

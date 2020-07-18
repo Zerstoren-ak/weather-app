@@ -8,13 +8,13 @@ function FormCitySearchContainer({addCity, apiKey, toastSettings}) {
 
     useEffect(() => {
         if (Object.entries(cityData).length !== 0) {
-            console.log('FormCitySearch API data:', cityData)
-            addCity([cityData]);
+            console.log('FormCitySearch API data:', cityData);
+            addCity([cityData]); //props return to WeatherGlobal
         }
         // eslint-disable-next-line
     },[cityData]);
 
-    async function handleForm(event) {
+    async function getCityByName(event) {
         event.preventDefault();
         try {
             const city = event.target.city.value;
@@ -40,7 +40,7 @@ function FormCitySearchContainer({addCity, apiKey, toastSettings}) {
     }
 
     return (
-        <FormCitySearch handleForm={handleForm}/>
+        <FormCitySearch handleForm={getCityByName}/>
     )
 }
 

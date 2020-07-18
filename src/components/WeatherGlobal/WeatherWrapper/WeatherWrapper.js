@@ -3,72 +3,76 @@ import WeatherShort from "./WeatherShort/WeatherShort";
 import WeatherDetailed from "./WeatherDetailed/WeatherDetailed";
 import {Draggable} from "react-beautiful-dnd";
 import './WeatherWrapper.css';
-import Sun from './video/Sun.mp4';
-import Clouds from './video/Clouds-day.mp4';
-import Rain from './video/Rain-day.mp4';
-import Thunderstorm from './video/Thunderstorm-day.mp4';
-import Snow from './video/Snowfall.mp4';
-import Drizzle from './video/Drizzle-day.mp4';
-import Fog from './video/Fog-day.mp4';
+
+function importAll(_require) {
+    let videos = {};
+    _require.keys().map((element) => {
+        return(videos[element.replace('./', '')] = _require(element))
+    });
+    return videos;
+}
+const VIDEOS = importAll(require.context('./videos', false, /\.mp4/));
 
 function WeatherWrapper(props) {
-    const [detailed, setDetailed] = useState(true);
+    const [toggleWeatherFlag, setToggleWeatherFlag] = useState(true);
     const [videoSource, setVideoSource] = useState(null);
 
-    function toggleWeatherDetailed() {
-        setDetailed(!detailed);
+    function toggleWeatherToShow() {
+        setToggleWeatherFlag(!toggleWeatherFlag);
     }
 
-    function weatherShort() {
+    function createWeatherShort() {
         return(
             <WeatherShort
                 cityData={props.cityData}
                 weatherData={props.weatherData}
-                clickHandlerExpand={toggleWeatherDetailed}
+                clickHandlerExpand={toggleWeatherToShow}
                 removeCity={props.clickHandlerRemove}
             />
         )
     }
 
-    function weatherDetailed() {
+    function createWeatherDetailed() {
         return (
             <WeatherDetailed
                 cityData={props.cityData}
                 weatherData={props.weatherData}
-                clickHandlerMinify={toggleWeatherDetailed}
+                clickHandlerMinify={toggleWeatherToShow}
             />
         )
     }
 
-    function convertToString(props) {
-        if (props) {
-            return props.toString()
+    function convertToString(_props) {
+        if (_props) {
+            return _props.toString()
         }
     }
 
     useEffect(() => {
         if (props.weatherData.description) {
-            const APIDescription = props.weatherData.description;
-            if (APIDescription === 'Rain') {
-                setVideoSource(Rain);
+            const weatherDescriptionAPI = props.weatherData.description;
+            if (weatherDescriptionAPI === 'Rain') {
+                setVideoSource(VIDEOS['Rain-day.mp4']);
             }
-            if (APIDescription === 'Clear') {
-                setVideoSource(Sun);
+            if (weatherDescriptionAPI === 'Clear') {
+                setVideoSource(VIDEOS['Sun.mp4']);
             }
-            if (APIDescription === 'Clouds') {
-                setVideoSource(Clouds);
+            if (weatherDescriptionAPI === 'Clouds') {
+                setVideoSource(VIDEOS['Clouds-day.mp4']);
             }
-            if (APIDescription === 'Thunderstorm') {
-                setVideoSource(Thunderstorm);
+            if (weatherDescriptionAPI === 'Thunderstorm') {
+                setVideoSource(VIDEOS['Thunderstorm-day.mp4']);
             }
-            if (APIDescription === 'Drizzle') {
-                setVideoSource(Drizzle);
+            if (weatherDescriptionAPI === 'Drizzle') {
+                setVideoSource(VIDEOS['Drizzle-day.mp4']);
             }
-            if (APIDescription === 'Snow') {
-                setVideoSource(Snow);
+            if (weatherDescriptionAPI === 'Snow') {
+                setVideoSource(VIDEOS['Snowfall.mp4']);
             }
-            if (APIDescription === 'Fog' || APIDescription === 'Haze' || APIDescription === 'Mist') {
-                setVideoSource(Fog);
+            if (weatherDescriptionAPI === 'Fog'
+                || weatherDescriptionAPI === 'Haze'
+                || weatherDescriptionAPI === 'Mist') {
+                setVideoSource(VIDEOS['Fog-day.mp4']);
             }
         }
     }, [props]);
@@ -82,7 +86,7 @@ function WeatherWrapper(props) {
                      {...provided.dragHandleProps}
                 >
                     <video autoPlay loop muted playsInline src={videoSource}></video>
-                    {detailed ? weatherShort() : weatherDetailed()}
+                    {toggleWeatherFlag ? createWeatherShort() : createWeatherDetailed()}
                 </div>
             }
         </Draggable>

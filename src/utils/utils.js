@@ -1,4 +1,4 @@
-function degree(temperature) {
+function degreePrettier(temperature) {
     return (
         Math.round(temperature) + '\u00B0C'
     )
@@ -12,4 +12,4 @@ function timeFormatter(time) {
     return formatter.format(time);
 }
 
-export {degree, timeFormatter};
+export {degreePrettier, timeFormatter};

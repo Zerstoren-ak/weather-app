@@ -34,7 +34,7 @@ function WeatherGlobal() {
         }
     }
 
-    const getWeather = useCallback(async () => {
+    const getWeatherByIDs = useCallback(async () => {
         let idList = citiesList.map(element => element.id).join(`,`);
         if (citiesList.length) {
             try {
@@ -71,8 +71,8 @@ function WeatherGlobal() {
     }, [citiesList]);
 
     useEffect(() => {
-        getWeather();
-    }, [getWeather]);
+        getWeatherByIDs();
+    }, [getWeatherByIDs]);
 
     useEffect(() => {
         localStorage.citiesList = JSON.stringify(citiesList);

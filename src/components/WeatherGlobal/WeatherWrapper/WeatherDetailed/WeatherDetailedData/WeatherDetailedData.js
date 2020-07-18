@@ -1,10 +1,10 @@
 import React from "react";
-import {degree,timeFormatter} from "../../../../../utils/utils";
+import {degreePrettier,timeFormatter} from "../../../../../utils/utils";
 import './WeatherDetailedData.css'
 
 function WeatherDetailedData(props) {
-    const now = new Date();
-    const toLocalTime = (now.getTimezoneOffset() * 60000) + (props.weatherData.timezone*1000);
+    const newDate = new Date();
+    const toLocalTime = (newDate.getTimezoneOffset() * 60000) + (props.weatherData.timezone*1000);
 
     const sunrise = (props.weatherData.sunrise * 1000) + toLocalTime;
     const sunset = (props.weatherData.sunset * 1000) + toLocalTime;
@@ -21,7 +21,7 @@ function WeatherDetailedData(props) {
             </li>
             <li>
                 <h4>Feels like</h4>
-                <p>{degree(props.weatherData.feelsLike)}</p>
+                <p>{degreePrettier(props.weatherData.feelsLike)}</p>
             </li>
             <li>
                 <h4>Clouds</h4>
@@ -29,11 +29,11 @@ function WeatherDetailedData(props) {
             </li>
             <li>
                 <h4>Temp. min</h4>
-                <p>{degree(props.weatherData.temperatureMin)}</p>
+                <p>{degreePrettier(props.weatherData.temperatureMin)}</p>
             </li>
             <li>
                 <h4>Temp. max</h4>
-                <p>{degree(props.weatherData.temperatureMax)}</p>
+                <p>{degreePrettier(props.weatherData.temperatureMax)}</p>
             </li>
             <li>
                 <h4>Pressure</h4>
